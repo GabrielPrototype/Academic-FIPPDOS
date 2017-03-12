@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
+      <itemPath>headers/dir_structs.h</itemPath>
+      <itemPath>headers/disk_structs.h</itemPath>
+      <itemPath>headers/file_structs.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
@@ -39,6 +42,12 @@
           <standard>10</standard>
         </cTool>
       </compileType>
+      <item path="headers/dir_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/disk_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
@@ -63,6 +72,12 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="headers/dir_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/disk_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
