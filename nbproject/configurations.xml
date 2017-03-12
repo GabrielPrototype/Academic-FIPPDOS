@@ -38,9 +38,6 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
-        <cTool>
-          <standard>10</standard>
-        </cTool>
       </compileType>
       <item path="headers/dir_structs.h" ex="false" tool="3" flavor2="0">
       </item>
