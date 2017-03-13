@@ -5,23 +5,34 @@
  */
 
 /* 
- * File:   main.c
+ * File:   file_structs.h
  * Author: titan
  *
- * Created on 12 de Março de 2017, 01:48
+ * Created on 12 de Março de 2017, 15:54
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef FILE_STRUCTS_H
+#define FILE_STRUCTS_H
 
-/*
- * 
- */
-int main(int argc, char** argv) {
-    
-    printf("F I P P DOS");
-    
-    printf("\n");
-    return (EXIT_SUCCESS);
-}
+struct file_content_letter {
+    struct file_content_letter *ant, *prox;
+    char letra;
+};
+
+struct file_content_line {
+    struct file_content_line *top, *bottom;
+    int letras;
+    struct file_content_letter *linha;
+};
+
+struct file_header {
+    struct file_header *prox;
+    char NomeArq[255];
+    char data[9];
+    char hora[5];
+    struct file_content_line *ConteudoArq;
+};
+
+typedef file_header File_header;
+#endif /* FILE_STRUCTS_H */
 
