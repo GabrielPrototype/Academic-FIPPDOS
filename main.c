@@ -5,14 +5,14 @@
  */
 
 /* 
- * File:   main.c
+ * File:   file_structs.h
  * Author: titan
  *
- * Created on 12 de Março de 2017, 01:48
+ * Created on 12 de Março de 2017, 15:54
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef FILE_STRUCTS_H
+#define FILE_STRUCTS_H
 
 #include "headers/disk_structs.h"
 
