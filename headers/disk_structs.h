@@ -35,12 +35,14 @@ void diskunit_init(Disk_unit **Disk, char *Unit) {
     (*Disk)->bottom = NULL;
     (*Disk)->top = NULL;
     (*Disk)->iniDir = NULL;
-    (*Disk)->unidade = Unit;
+    (*Disk)->unidade = (char)Unit;
 };
 
+
 Disk_unit * diskunit_find_pos(Disk_unit *LStart_Dsk, char Disk_letter) {
-    Disk_unit *pos_unit;
-    while(pos_unit->bottom != NULL && pos_unit->unidade >= Disk_letter)
+    Disk_unit *pos_unit = NULL;
+    pos_unit = LStart_Dsk;
+    while(pos_unit->bottom != NULL && pos_unit->unidade <= Disk_letter)
         pos_unit = pos_unit->bottom;
     
     return pos_unit;
@@ -52,7 +54,7 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
 
     if (*LStart_Dsk == NULL) {
         *LStart_Dsk = *Disk;
-    } else if ((*LStart_Dsk)->unidade < (*Disk)->unidade) { //disco será inserido no começo
+    } else if ((*Disk)->unidade < (*LStart_Dsk)->unidade) { //disco será inserido no começo
 
         (*Disk)->bottom = *LStart_Dsk;
         (*LStart_Dsk)->bottom = *Disk;
@@ -64,11 +66,17 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
             (*Disk)->top = ptrpos;
             ptrpos->bottom = *Disk;
         } else {                        //inserção entre duas caixas
+            
             (*Disk)->bottom = ptrpos;
             (*Disk)->top = ptrpos->top;
             ptrpos->top->bottom = *Disk;
             ptrpos->top = *Disk;
         }
     }
+};
+
+void diskunit_delete(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
+    
+    
 };
 #endif /* DISK_STRUCTS_H */

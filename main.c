@@ -20,23 +20,54 @@
  * 
  */
 int main(int argc, char** argv) {
-    
+
     printf("F.I.P.P. DOS");
-    
-    Disk_unit *ldisk = NULL, *aux = NULL;
-    
-    for(char letra = 'A'; letra <= 'Z'; letra++){
-        diskunit_init(&aux, letra);
-        diskunit_insert(&ldisk,&aux);
-    }
-    
-    printf("\n");
-    
-    for( aux = ldisk; aux->bottom != NULL; aux = aux->bottom){
-        printf("unidade %c:\n", aux->unidade);
-    }
-    
+
+    diskunit_test();
+
     printf("\n");
     return (EXIT_SUCCESS);
 }
 
+void diskunit_test(void) {
+
+    Disk_unit *ldisk = NULL, *aux = NULL, *aux2 = NULL;
+
+    for (char letra = 'A'; letra <= 'Z'; letra++) {
+        diskunit_init(&aux, letra);
+        diskunit_insert(&ldisk, &aux);
+    }
+
+    printf("\n");
+
+    /*aux = ldisk;
+    while (aux){
+        
+        printf("unidade %c:\n", aux->unidade);
+        aux2 = aux;
+        aux = aux->bottom;
+    }*/
+
+    printf("\n");
+    for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
+        printf("unidade %c:\n", aux->unidade);
+    }
+
+    printf("\n");
+
+    /*while (aux2){
+        
+        printf("unidade %c:\n", aux2->unidade);
+        
+        aux2 = aux2->top;
+    }*/
+
+    for (aux2; aux2 != NULL; aux2 = aux2->top) {
+        printf("unidade %c:\n", aux2->unidade);
+    }
+    
+    printf("\n");
+    
+    aux = diskunit_find_pos(&ldisk,'C');
+    printf("Unidade encontrada = %c:", aux->unidade);
+};
