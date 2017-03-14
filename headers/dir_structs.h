@@ -15,6 +15,7 @@
 #define DIR_STRUCTS_H
 
 #include <stddef.h>
+#include "file_structs.h"
 
 struct dir_header{
     File_header *ListaArq;
@@ -25,11 +26,11 @@ struct dir_header{
     
 };
 
-typedef dir_header Dir_header;
+typedef struct dir_header Dir_header;
 
 void init_dir_header(Dir_header **PtrDir){
     
-    (*PtrDir) = (Dir_header) malloc(sizeof Dir_header);
+    (*PtrDir) = (Dir_header*) malloc(sizeof(Dir_header));
     (*PtrDir)->Head = NULL;
     (*PtrDir)->Tail = NULL;
     (*PtrDir)->ListaArq = NULL;

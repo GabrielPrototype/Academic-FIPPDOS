@@ -33,6 +33,6 @@ struct file_header {
     struct file_content_line *ConteudoArq;
 };
 
-typedef file_header File_header;
+typedef struct file_header File_header;
 #endif /* FILE_STRUCTS_H */
 
