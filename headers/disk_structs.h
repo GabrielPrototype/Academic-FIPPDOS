@@ -15,6 +15,7 @@
 #define DISK_STRUCTS_H
 
 #include <stddef.h>
+#include <stdlib.h>
 #include "dir_structs.h"
 
 struct disk_unit {
@@ -48,6 +49,17 @@ Disk_unit * diskunit_find_pos(Disk_unit *LStart_Dsk, char Disk_letter) {
     return pos_unit;
 };
 
+Disk_unit * diskunit_find(Disk_unit *LStart_Dsk, char Disk_letter){
+
+    Disk_unit *disk;
+    disk = diskunit_find_pos(LStart_Dsk, Disk_letter)->top;
+    if(disk && disk->unidade == Disk_letter){
+        return disk;
+    }
+    
+    return NULL;
+};
+
 void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
 
     Disk_unit *ptrpos;
@@ -75,8 +87,15 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
     }
 };
 
-void diskunit_delete(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
+void diskunit_delete(Disk_unit **Disk) {
     
-    
+    (*Disk)->top->bottom = (*Disk)->bottom;
+    (*Disk)->bottom->top = (*Disk)->top;
+    free((*Disk));
 };
+
+void dissunit_delete_all(Disk_unit **LStart_Dsk){
+    
+    
+}
 #endif /* DISK_STRUCTS_H */

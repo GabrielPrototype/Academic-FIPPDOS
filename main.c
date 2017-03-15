@@ -61,13 +61,22 @@ void diskunit_test(void) {
         
         aux2 = aux2->top;
     }*/
-
+    
     for (aux2; aux2 != NULL; aux2 = aux2->top) {
         printf("unidade %c:\n", aux2->unidade);
     }
     
     printf("\n");
+    printf("Procure a unidade C: \n");
+    aux = diskunit_find(ldisk,'C');
+    printf("Unidade encontrada = %c:\n", aux->unidade);
+    printf("Deletando a Unidade C:");
+    diskunit_delete(&aux);
     
-    aux = diskunit_find_pos(&ldisk,'C');
-    printf("Unidade encontrada = %c:", aux->unidade);
+    aux = ldisk;
+    printf("\n");
+    for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
+        printf("unidade %c:\n", aux->unidade);
+    }
+    
 };
