@@ -41,7 +41,7 @@ void diskunit_test(void) {
     Disk_unit *ldisk = NULL, *aux = NULL, *aux2 = NULL;
 
     for (char letra = 'A'; letra <= 'Z'; letra++) {
-        diskunit_init(&aux, letra);
+        diskunit_init(&aux, (char)letra);
         diskunit_insert(&ldisk, &aux);
     }
 
@@ -72,7 +72,7 @@ void diskunit_test(void) {
 
     printf("\n");
     aux = NULL;
-    diskunit_init(&aux, 'A');
+    diskunit_init(&aux, (char)'A');
     diskunit_insert(&ldisk, &aux);
 
     printf("\n");
