@@ -1,4 +1,4 @@
-/*
+W/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -42,7 +42,7 @@ void qualosistemapatricia(){
     // linux
 void qualosistemapatricia(){
     printf("\n\n\nO sistema é linux, Silvio");
-};
+}
 #elif __unix__ // all unices not caught above
     // Unix
 #elif defined(_POSIX_VERSION)

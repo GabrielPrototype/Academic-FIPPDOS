@@ -91,7 +91,8 @@ void diskunit_delete(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
 
     if ((*LStart_Dsk)->unidade == (*Disk)->unidade) {
         *LStart_Dsk = (*Disk)->bottom;
-        (*LStart_Dsk)->top = NULL;
+        if ((*Disk)->bottom)
+            (*LStart_Dsk)->top = NULL;
     } else {
         if ((*Disk)->top != NULL)
             (*Disk)->top->bottom = (*Disk)->bottom;
@@ -113,8 +114,29 @@ void diskunit_delete_teste(Disk_unit **Disk, Disk_unit **LStart_Dsk) {
     free((*Disk));
 };
 
-void dissunit_delete_all(Disk_unit **LStart_Dsk) {
+void diskunit_delete_all(Disk_unit **LStart_Dsk) {
 
+    Disk_unit *aux;
+    while ((*LStart_Dsk)) {
+        aux = *LStart_Dsk;
+        diskunit_delete(&(*LStart_Dsk), &aux);
+    }
+};
 
+void diskunit_delete_all_reverse(Disk_unit **LStart_Dsk) {
+    
+    Disk_unit *aux, *aux2;
+    
+//    aux = *LStart_Dsk;
+//    while (aux->bottom){
+//        aux = aux->bottom;
+//    }
+    
+    for (aux = *LStart_Dsk; aux->bottom; aux = aux->bottom);
+    
+    while (aux) {
+        aux2 = aux;
+        diskunit_delete(&aux, &aux2);
+    }
 }
 #endif /* DISK_STRUCTS_H */
