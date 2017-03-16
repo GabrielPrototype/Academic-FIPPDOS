@@ -15,22 +15,18 @@
 #define TESTE_DETECT_OS_H
 
 
-#ifdef _WIN32
-    //define something for Windows (32-bit and 64-bit, this part is common)
-void qualosistemapatricia(){
-    printf("\n\n\nO sistema é Windows, Silvio");
-};
+
 #ifdef _WIN64
     //define something for Windows (64-bit only)
 void qualosistemapatricia(){
     printf("\n\n\nO sistema é Windows x64, Silvio");
 };
-#else
-    //define something for Windows (32-bit only)
+#elif _WIN32
+    //define something for Windows (32-bit and 64-bit, this part is common)
 void qualosistemapatricia(){
-    printf("\n\n\nO sistema é Windows x32, Silvio");
+    printf("\n\n\nO sistema é Windows, Silvio");
 };
-#endif
+ 
 #elif __APPLE__
 #include "TargetConditionals.h"
 #if TARGET_IPHONE_SIMULATOR
