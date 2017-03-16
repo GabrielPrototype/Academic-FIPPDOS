@@ -69,7 +69,7 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
     } else if ((*Disk)->unidade < (*LStart_Dsk)->unidade) { //disco será inserido no começo
 
         (*Disk)->bottom = *LStart_Dsk;
-        (*LStart_Dsk)->bottom = *Disk;
+        (*LStart_Dsk)->top = *Disk;
         *LStart_Dsk = *Disk;
     } else {
 
@@ -87,13 +87,21 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
     }
 };
 
-void diskunit_delete(Disk_unit **Disk) {
+void diskunit_delete(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
 
-    if ((*Disk)->top != NULL)
-        (*Disk)->top->bottom = (*Disk)->top;
-    if ((*Disk)->bottom != NULL)
-        (*Disk)->bottom->top = (*Disk)->bottom;
+    if ((*LStart_Dsk)->unidade == (*Disk)->unidade) {
+        *LStart_Dsk = (*Disk)->bottom;
+        (*LStart_Dsk)->top = NULL;
+    } else {
+        if ((*Disk)->top != NULL)
+            (*Disk)->top->bottom = (*Disk)->bottom;
+
+        if ((*Disk)->bottom != NULL)
+            (*Disk)->bottom->top = (*Disk)->top;
+    }
+
     free((*Disk));
+
 };
 
 void diskunit_delete_teste(Disk_unit **Disk, Disk_unit **LStart_Dsk) {

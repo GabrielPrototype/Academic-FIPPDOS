@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "headers/disk_structs.h"
-//#include "headers/teste_detect_os.h"
+#include "headers/teste_detect_os.h"
 
 /*
  * 
@@ -24,13 +24,13 @@ int main(int argc, char** argv) {
 
     printf("F.I.P.P. DOS");
 
-    
-    //qualosistemapatricia();
+
+    qualosistemapatricia();
     diskunit_test();
     printf("\n");
     //getchar();
     return (EXIT_SUCCESS);
-    
+
 }
 
 
@@ -45,56 +45,38 @@ void diskunit_test(void) {
         diskunit_insert(&ldisk, &aux);
     }
 
-    printf("\n");
+    printf("\n\n");
 
-    /*aux = ldisk;
-    while (aux){
-        
-        printf("unidade %c:\n", aux->unidade);
-        aux2 = aux;
-        aux = aux->bottom;
-    }*/
-
-    printf("\n");
     for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
         printf("unidade %c:\n", aux->unidade);
     }
 
     printf("\n");
-
-    /*while (aux2){
-        
-        printf("unidade %c:\n", aux2->unidade);
-        
-        aux2 = aux2->top;
-    }*/
 
     for (aux2; aux2 != NULL; aux2 = aux2->top) {
         printf("unidade %c:\n", aux2->unidade);
     }
 
     printf("\n");
-    printf("Procurando a unidade Z: \n");
+    printf("Procurando a unidade A: \n");
     aux = diskunit_find(ldisk, 'A');
     printf("Unidade encontrada = %c:\n", aux->unidade);
-    printf("Deletando a Unidade Z:");
-    diskunit_delete(&aux,&ldisk);
-    
-     printf("\n");
+    printf("Deletando a Unidade A:");
+    diskunit_delete(&ldisk, &aux);
 
-    aux = ldisk;
-    printf("\n");
+    printf("\n\n");
+
     for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
         printf("unidade %c:\n", aux->unidade);
     }
 
     printf("\n");
     aux = NULL;
-    diskunit_init(&aux, 'C');
+    diskunit_init(&aux, 'A');
     diskunit_insert(&ldisk, &aux);
-    
-    aux = ldisk;
+
     printf("\n");
+    
     for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
         printf("unidade %c:\n", aux->unidade);
     }
