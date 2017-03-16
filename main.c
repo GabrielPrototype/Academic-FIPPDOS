@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "headers/disk_structs.h"
-#include "headers/teste_detect_os.h"
+//#include "headers/teste_detect_os.h"
 
 /*
  * 
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     printf("F.I.P.P. DOS");
 
 
-    qualosistemapatricia();
+    //qualosistemapatricia();
     diskunit_test();
     printf("\n");
     //getchar();
@@ -80,4 +80,35 @@ void diskunit_test(void) {
     for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
         printf("unidade %c:\n", aux->unidade);
     }
+    
+    printf("\n");
+    printf("Deletando toda a lista \n");
+    diskunit_delete_all(&ldisk);
+    
+    if(!ldisk)
+        printf("Lista vazia\n");
+    
+    for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
+        printf("unidade %c:\n", aux->unidade);
+    }
+    
+    printf( "\n",
+            "\nInserindo de forma reversa e ordenando automaticamente");
+    for (char letra = 'Z'; letra >= 'A'; letra--) {
+        diskunit_init(&aux, (char)letra);
+        diskunit_insert(&ldisk, &aux);
+    }
+    
+    printf("\n\n");
+
+    for (aux = ldisk; aux != NULL; aux2 = aux, aux = aux->bottom) {
+        printf("unidade %c:\n", aux->unidade);
+    }
+    
+    printf("\n");
+    printf("Deletando toda a de forma reversa \n");
+    diskunit_delete_all_reverse(&ldisk);
+    
+    if(!ldisk)
+        printf("Lista vazia\n");
 };
