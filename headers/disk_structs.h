@@ -31,32 +31,32 @@ struct disk_unit_list {
 
 typedef struct disk_unit Disk_unit;
 
-void diskunit_init(Disk_unit **Disk, char *Unit) {
-    (*Disk) = (Disk_unit*) malloc(sizeof(Disk_unit));
+void diskunit_init(Disk_unit **Disk, char *Unit) {//criacaixa
+    (*Disk) = (Disk_unit*) malloc(sizeof (Disk_unit));
     (*Disk)->bottom = NULL;
     (*Disk)->top = NULL;
     (*Disk)->iniDir = NULL;
-    (*Disk)->unidade = (char)Unit;
+    (*Disk)->unidade = (char) Unit;
 };
-
 
 Disk_unit * diskunit_find_pos(Disk_unit *LStart_Dsk, char Disk_letter) {
     Disk_unit *pos_unit = NULL;
     pos_unit = LStart_Dsk;
-    while(pos_unit->bottom != NULL && pos_unit->unidade <= Disk_letter)
+    while (pos_unit->bottom != NULL && pos_unit->unidade <= Disk_letter)
         pos_unit = pos_unit->bottom;
-    
+
     return pos_unit;
 };
 
-Disk_unit * diskunit_find(Disk_unit *LStart_Dsk, char Disk_letter){
+Disk_unit * diskunit_find(Disk_unit *LStart_Dsk, char Disk_letter) {
 
-    Disk_unit *disk;
-    disk = diskunit_find_pos(LStart_Dsk, Disk_letter)->top;
-    if(disk && disk->unidade == Disk_letter){
+    Disk_unit *disk = LStart_Dsk;
+    while (disk != NULL && disk->unidade < Disk_letter)
+        disk = disk->bottom;
+    if (disk && disk->unidade == Disk_letter) {
         return disk;
     }
-    
+
     return NULL;
 };
 
@@ -72,13 +72,13 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
         (*LStart_Dsk)->bottom = *Disk;
         *LStart_Dsk = *Disk;
     } else {
-        
+
         ptrpos = diskunit_find_pos(*LStart_Dsk, (*Disk)->unidade);
-        if(ptrpos->bottom == NULL) {    //inserção no final
+        if (ptrpos->bottom == NULL) { //inserção no final
             (*Disk)->top = ptrpos;
             ptrpos->bottom = *Disk;
-        } else {                        //inserção entre duas caixas
-            
+        } else { //inserção entre duas caixas
+
             (*Disk)->bottom = ptrpos;
             (*Disk)->top = ptrpos->top;
             ptrpos->top->bottom = *Disk;
@@ -88,14 +88,25 @@ void diskunit_insert(Disk_unit **LStart_Dsk, Disk_unit **Disk) {
 };
 
 void diskunit_delete(Disk_unit **Disk) {
-    
-    (*Disk)->top->bottom = (*Disk)->bottom;
-    (*Disk)->bottom->top = (*Disk)->top;
+
+    if ((*Disk)->top != NULL)
+        (*Disk)->top->bottom = (*Disk)->top;
+    if ((*Disk)->bottom != NULL)
+        (*Disk)->bottom->top = (*Disk)->bottom;
     free((*Disk));
 };
 
-void dissunit_delete_all(Disk_unit **LStart_Dsk){
-    
-    
+void diskunit_delete_teste(Disk_unit **Disk, Disk_unit **LStart_Dsk) {
+
+    if ((*Disk)->top != NULL)
+        (*Disk)->top->bottom = (*Disk)->bottom;
+    if ((*Disk)->bottom != NULL)
+        *LStart_Dsk = (*Disk)->bottom;
+    free((*Disk));
+};
+
+void dissunit_delete_all(Disk_unit **LStart_Dsk) {
+
+
 }
 #endif /* DISK_STRUCTS_H */

@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "headers/disk_structs.h"
-#include "headers/teste_detect_os.h"
+//#include "headers/teste_detect_os.h"
 
 /*
  * 
@@ -25,10 +25,12 @@ int main(int argc, char** argv) {
     printf("F.I.P.P. DOS");
 
     
-    qualosistemapatricia();
+    //qualosistemapatricia();
     diskunit_test();
     printf("\n");
+    //getchar();
     return (EXIT_SUCCESS);
+    
 }
 
 
@@ -72,11 +74,11 @@ void diskunit_test(void) {
     }
 
     printf("\n");
-    printf("Procurando a unidade C: \n");
-    aux = diskunit_find(ldisk, 'C');
+    printf("Procurando a unidade Z: \n");
+    aux = diskunit_find(ldisk, 'A');
     printf("Unidade encontrada = %c:\n", aux->unidade);
-    printf("Deletando a Unidade C:");
-    diskunit_delete(&aux);
+    printf("Deletando a Unidade Z:");
+    diskunit_delete(&aux,&ldisk);
     
      printf("\n");
 
