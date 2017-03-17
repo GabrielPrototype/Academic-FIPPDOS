@@ -1,4 +1,4 @@
-W/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,8 +11,8 @@ W/*
  * Created on 14 de Março de 2017, 23:39
  */
 
-#ifndef TESTE_DETECT_OS_H
-#define TESTE_DETECT_OS_H
+//#ifndef TESTE_DETECT_OS_H
+//#define TESTE_DETECT_OS_H
 
 
 
@@ -51,5 +51,5 @@ void qualosistemapatricia(){
 #error "Unknown compiler"
 #endif
 
-#endif /* TESTE_DETECT_OS_H */
+//#endif /* TESTE_DETECT_OS_H */
 

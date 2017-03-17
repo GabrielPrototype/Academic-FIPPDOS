@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "headers/disk_structs.h"
-//#include "headers/teste_detect_os.h"
+#include "headers/teste_detect_os.h"
 
 /*
  * 
@@ -25,10 +25,20 @@ int main(int argc, char** argv) {
     printf("F.I.P.P. DOS");
 
 
+    //printf("\n\nMah oi, qual o sistema patricia?\n");
     //qualosistemapatricia();
-    diskunit_test();
+    //diskunit_test();
     printf("\n");
-    //getchar();
+    char info = 'a';
+    char *L1;
+    char *L2;
+    
+    L2 = NULL;
+    
+    if(!((L1 == NULL) && (L2 == NULL)) ){
+        printf("Diferentes");
+    }
+    getchar();
     return (EXIT_SUCCESS);
 
 }
