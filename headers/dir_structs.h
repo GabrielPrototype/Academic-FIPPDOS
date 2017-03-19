@@ -29,21 +29,21 @@ struct dir_header {
 
 typedef struct dir_header Dir_header;
 
-void init_dir_header(Dir_header **PtrDir) {
+void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) {
 
     (*PtrDir) = (Dir_header*) malloc(sizeof (Dir_header));
     (*PtrDir)->Head = NULL;
     (*PtrDir)->Tail = NULL;
     (*PtrDir)->ListaArq = NULL;
     (*PtrDir)->PtrPai = NULL;
-    strcpy((*PtrDir)->NomeDir[0], "nome");
-    (*PtrDir)->data[0] = '\n';
-    (*PtrDir)->hora[0] = '\n';
+    strcpy((*PtrDir)->NomeDir, nomeDir);
+    (*PtrDir)->data[0] = data;
+    (*PtrDir)->hora[0] = hora;
 };
 
-dir_header *Cons(Dir_header **Construcao) {
-
-}
+//dir_header *Cons(Dir_header **Construcao) {
+//
+//}
 
 void insere_diretorio(Dir_header **Pai, Dir_header **Diretorio) {
     Dir_header *aux, *ant;
@@ -52,20 +52,26 @@ void insere_diretorio(Dir_header **Pai, Dir_header **Diretorio) {
         (*Pai)->Head = (*Diretorio);
         (*Diretorio)->PtrPai = (*Pai);
     } else {
-        if (strcmp((*Diretorio)->NomeDir ,(*Pai)->Head->NomeDir) < 0) {
+        if (strcmp((*Diretorio)->NomeDir, (*Pai)->Head->NomeDir) < 0) {
             (*Diretorio)->Tail = (*Pai)->Head;
-            (*Pai)->Head = (*Diretorio); 
+            (*Pai)->Head = (*Diretorio);
+            (*Diretorio)->PtrPai = (*Pai);
         } else {
             aux = (*Pai)->Head;
-            while (aux != NULL && strcmp(aux->NomeDir, aux->Tail->NomeDir) >= 0) {
+            while (aux != NULL && strcmp(aux->NomeDir, (*Diretorio)->NomeDir) < 0) {
                 ant = aux;
                 aux = aux->Tail;
             }
-            if (strcmp(aux->NomeDir, (*Diretorio)->NomeDir) == 0) {
-                return -1;
+            if (strcmp(ant->NomeDir, (*Diretorio)->NomeDir) == 0 || strcmp(aux->NomeDir, (*Diretorio)->NomeDir) == 0) {
+                return -1; // não é possivel inserir diretorios duplicados
             }
-            if (aux->Tail == NULL) {
+            if (aux == NULL) {  // insere no fim
                 ant->Tail = Diretorio;
+                (*Diretorio)->PtrPai = (*Pai);
+            } else {                        //insere no meio
+                ant->Tail = (*Diretorio);
+                (*Diretorio)->Tail = aux;
+                (*Diretorio)->PtrPai = (*Pai);
             }
         }
     }
