@@ -36,7 +36,7 @@ void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) 
     (*PtrDir)->Tail = NULL;
     (*PtrDir)->ListaArq = NULL;
     (*PtrDir)->PtrPai = NULL;
-    strcpy((*PtrDir)->NomeDir, nomeDir);
+    strncpy((*PtrDir)->NomeDir, nomeDir,254);
     (*PtrDir)->data[0] = data;
     (*PtrDir)->hora[0] = hora;
 };
