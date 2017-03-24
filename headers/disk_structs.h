@@ -36,7 +36,7 @@ void diskunit_init(Disk_unit **Disk, char *Unit) {//criacaixa
     (*Disk)->bottom = NULL;
     (*Disk)->top = NULL;
     (*Disk)->iniDir = NULL;
-    (*Disk)->unidade = (char) Unit;
+    (*Disk)->unidade = Unit;
 };
 
 Disk_unit * diskunit_find_pos(Disk_unit *LStart_Dsk, char Disk_letter) {

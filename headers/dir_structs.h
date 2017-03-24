@@ -36,7 +36,7 @@ void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) 
     (*PtrDir)->Tail = NULL;
     (*PtrDir)->ListaArq = NULL;
     (*PtrDir)->PtrPai = NULL;
-    strncpy((*PtrDir)->NomeDir, nomeDir,254);
+    strncpy((*PtrDir)->NomeDir, nomeDir, 254);
     (*PtrDir)->data[0] = data;
     (*PtrDir)->hora[0] = hora;
 };
@@ -45,40 +45,49 @@ void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) 
 //
 //}
 
-void dir_insert_diretorio(Dir_header **Pai, Dir_header **Diretorio) {
+void dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
     Dir_header *aux, *ant;
     //verificar se e a unica pasta dentro do pai se nao inserir ordenado
-    if ((*Pai)->Head == NULL) {
-        (*Pai)->Head = (*Diretorio);
-        (*Diretorio)->PtrPai = (*Pai);
+    if ((*Dir_top)->Head == NULL) {
+        (*Dir_top)->Head = (*Dir);
+        (*Dir)->PtrPai = (*Dir_top);
     } else {
-        if (strcmp((*Diretorio)->NomeDir, (*Pai)->Head->NomeDir) < 0) {
-            (*Diretorio)->Tail = (*Pai)->Head;
-            (*Pai)->Head = (*Diretorio);
-            (*Diretorio)->PtrPai = (*Pai);
+        if (strcmp((*Dir)->NomeDir, (*Dir_top)->Head->NomeDir) < 0) {
+            (*Dir)->Tail = (*Dir_top)->Head;
+            (*Dir_top)->Head = (*Dir);
+            (*Dir)->PtrPai = (*Dir_top);
         } else {
-            aux = (*Pai)->Head;
-            while (aux != NULL && strcmp(aux->NomeDir, (*Diretorio)->NomeDir) < 0) {
+            aux = (*Dir_top)->Head;
+            while (aux != NULL && strcmp(aux->NomeDir, (*Dir)->NomeDir) < 0) {
                 ant = aux;
                 aux = aux->Tail;
             }
-            if (strcmp(ant->NomeDir, (*Diretorio)->NomeDir) == 0 || strcmp(aux->NomeDir, (*Diretorio)->NomeDir) == 0) {
+            if (strcmp(ant->NomeDir, (*Dir)->NomeDir) == 0 || strcmp(aux->NomeDir, (*Dir)->NomeDir) == 0) {
                 return -1; // não é possivel inserir diretorios duplicados
             }
-            if (aux == NULL) {  // insere no fim
-                ant->Tail = Diretorio;
-                (*Diretorio)->PtrPai = (*Pai);
-            } else {                        //insere no meio
-                ant->Tail = (*Diretorio);
-                (*Diretorio)->Tail = aux;
-                (*Diretorio)->PtrPai = (*Pai);
+            if (aux == NULL) { // insere no fim
+                ant->Tail = Dir;
+                (*Dir)->PtrPai = (*Dir_top);
+            } else { //insere no meio
+                ant->Tail = (*Dir);
+                (*Dir)->Tail = aux;
+                (*Dir)->PtrPai = (*Dir_top);
             }
         }
     }
 }
 
-Dir_header procurar_pasta(Dir_header **Pai, char *nomePasta) {
+Dir_header * dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
 
+    Dir_header *aux = *Dir_top;
+
+    while (aux->Tail != NULL && strcmp(aux->NomeDir, Dir_name) > 0); {
+        aux = aux->Tail;
+    } 
+
+    if (strcmp(aux->NomeDir, Dir_name) == 0)
+        return aux;
+    return NULL;
 }
 #endif /* DIR_STRUCTS_H */
 
