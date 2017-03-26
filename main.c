@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     int execute;
     time_t t = time(NULL);
     struct tm *tempo = localtime(&t);
-    struct tm tempo2 = *tempo
+    struct tm tempo2 = *tempo;
     Disk_unit *diskselec;
     Disk_unit *raiz;
     Dir_header *dirselec;
@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
 	fflush(stdin);
 	gets(linhac);
 		
-	execute = interpretador(char linhac[],Disk_unit *raiz,Disk_unit *diskselec,Dir_header *dirselec);
+	execute = interpretador(char linhac[],Disk_unit *raiz,Disk_unit *diskselec ,Dir_header *dirselec);
                 
     }while(execute>0);
 
@@ -155,4 +155,45 @@ void dir_test(void) {
 
     dir_insert_diretorio(&test_C, aux);
 
+}
+char SeparadordeComando(char *com[], int *pos)
+{
+    int i=0;
+    //Ignora "espaços" antes do inicio do comando
+	while(com[pos] == ' ')
+		pos++;
+	//localiza comando
+	while(com[pos] != '\0' && com[pos] != ' ')
+	{
+		com[i] = com[pos];
+		i++;
+		pos++;
+	}
+	com[i] = '\0';
+	strcpy(com, strupr(com));
+    return com;
+}
+int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header *diratual)
+{
+    int posicao = 0, i=0;
+    char comando[15],endereco[100];
+    
+    comando=SeparadordeComando(char comando[], int posicao);
+    
+    if(strcmp(comando, "EXIT") == 0)
+	{
+		printf("\n\nEXIT");
+		return 0;
+	}
+    else if(strcmp(comando, "DIR") == 0)
+	{	
+		endereco=SeparadordeComando(char endereco[], int posicao);
+		//DIR(endereco, raiz, &(*diskatual), &(*diratual));
+	}
+    else if(strcmp(comando, "CLS") == 0)
+	{	
+		system("cls");
+		printf("\n");
+	}
+    return 1;
 }
