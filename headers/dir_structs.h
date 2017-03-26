@@ -77,17 +77,33 @@ void dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
     }
 }
 
-Dir_header * dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
+Dir_header **dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
 
     Dir_header *aux = *Dir_top;
 
-    while (aux->Tail != NULL && strcmp(aux->NomeDir, Dir_name) > 0); {
+    while (aux->Tail != NULL && strcmp(aux->NomeDir, Dir_name) > 0);
+    {
         aux = aux->Tail;
-    } 
+    }
 
     if (strcmp(aux->NomeDir, Dir_name) == 0)
-        return aux;
+        return &aux;
     return NULL;
+}
+
+char dir_Delete(Dir_header **Dir_top, char Dir_name[]) {
+    Dir_header *dir,*aux;
+    dir = dir_find_dir(*Dir_top, Dir_name);
+    if (Dir_top->Head==dir) {//primeiro
+        //repetiçao para deletar arquivos
+        while (dir_num_arquivo > 0) {
+            //recebe primeiro arquivo
+            //deleta o arquivo
+        }
+        aux=dir->Tail;
+        Dir_top=aux;
+        free(dir);
+    }
 }
 #endif /* DIR_STRUCTS_H */
 
