@@ -93,43 +93,61 @@ Dir_header *dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
     return NULL;
 }
 
-char dir_Delete(Dir_header **Dir_top, char Dir_name[]) {
+char dir_delete_allfiles(Dir_header *Dir) {
+
+    //repetiçao para deletar arquivos
+    while (Dir->ListaArq() != NULL) {
+        //recebe primeiro arquivo
+        //deleta o arquivo
+    }
+};
+
+char dir_delete_rec(Dir_header **Dir_top, Dir_header **Dir) {
+
+    while ((*Dir)->Head != NULL) {
+
+        dir_delete_rec(&(*Dir), &(*Dir)->Head);
+    }
+    dir_delete_allfiles(Dir_header * Dir);
+    free(*Dir);
+};
+
+char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de diretorios recursivamente
     Dir_header *dir, *dir_ant, *aux;
-    
+
     dir_ant = *Dir_top;
     dir = *Dir_top;
 
     while (dir->Tail != NULL && strcmp(dir->NomeDir, Dir_name) > 0);
-    {   
+    {
         dir_ant = dir;
         dir = dir->Tail;
     }
 
     if (strcmp(dir->NomeDir, Dir_name) != 0) // Diretorio não encontrado
         return ERROR_DIR_NOT_FOUND;
-    
-    //repetiçao para deletar arquivos
-    while (dir_num_arquivo > 0) {
-            //recebe primeiro arquivo
-            //deleta o arquivo
+
+
+    { // Bloco para remoção do Dir da lista.
+        
+        if ((*Dir_top)->Head == dir && dir->Tail == NULL) {//primeiro e unico
+
+            (*Dir_top)->Head == NULL;
+
+        } else if (Dir_top->Head == dir) { //primeiro, mas com vizinhos a direita.
+
+            aux = dir->Tail;
+            *Dir_top = aux;
+
+        } else { // no meio ou no final
+
+            aux = dir->Tail;
+            dir_ant = aux;
+            //free(dir);
+        }
     }
-    
-    if ((*Dir_top)->Head == dir && dir->Tail==NULL ) {//primeiro e unico
         
-        free(dir);
-        (*Dir_top)->Head == NULL;
-        
-    }else if(Dir_top->Head == dir) { //primeiro, mas com vizinhos a direita.
-        
-        aux = dir->Tail;
-        *Dir_top = aux;
-        free(dir);
-    
-    } else { // com vizinhos a esquerda
-        aux=dir->Tail;
-        dir_ant=aux;
-        free(dir);
-    }
+    dir_delete_rec(&(*Dir_top), &dir); // deleta o diretorio
 }
 #endif /* DIR_STRUCTS_H */
 
