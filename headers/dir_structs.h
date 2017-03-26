@@ -18,6 +18,8 @@
 #include <string.h>
 #include "file_structs.h"
 
+#define ERROR_DIR_NOT_FOUND -10;
+
 struct dir_header {
     File_header *ListaArq;
     struct dir_header *Head, *PtrPai, *Tail; //subdiretorio,ponteiropai,ponteiroirmao
@@ -77,7 +79,7 @@ void dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
     }
 }
 
-Dir_header **dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
+Dir_header *dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
 
     Dir_header *aux = *Dir_top;
 
@@ -87,22 +89,45 @@ Dir_header **dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
     }
 
     if (strcmp(aux->NomeDir, Dir_name) == 0)
-        return &aux;
+        return aux;
     return NULL;
 }
 
 char dir_Delete(Dir_header **Dir_top, char Dir_name[]) {
-    Dir_header *dir,*aux;
-    dir = dir_find_dir(*Dir_top, Dir_name);
-    if (Dir_top->Head==dir) {//primeiro
-        //repetiçao para deletar arquivos
-        while (dir_num_arquivo > 0) {
+    Dir_header *dir, *dir_ant, *aux;
+    
+    dir_ant = *Dir_top;
+    dir = *Dir_top;
+
+    while (dir->Tail != NULL && strcmp(dir->NomeDir, Dir_name) > 0);
+    {   
+        dir_ant = dir;
+        dir = dir->Tail;
+    }
+
+    if (strcmp(dir->NomeDir, Dir_name) != 0) // Diretorio não encontrado
+        return ERROR_DIR_NOT_FOUND;
+    
+    //repetiçao para deletar arquivos
+    while (dir_num_arquivo > 0) {
             //recebe primeiro arquivo
             //deleta o arquivo
-        }
-        aux=dir->Tail;
-        Dir_top=aux;
+    }
+    
+    if ((*Dir_top)->Head == dir && dir_ant == Dir_top ) {//primeiro e unico
+        
         free(dir);
+        (*Dir_top)->Head == NULL;
+        
+    }else if(Dir_top->Head == dir) { //primeiro, mas com vizinhos a direita.
+        
+        aux = dir->Tail;
+        *Dir_top = aux;
+        free(dir);
+    
+    } else { // com vizinhos a esquerda
+    
+    
     }
 }
 #endif /* DIR_STRUCTS_H */
