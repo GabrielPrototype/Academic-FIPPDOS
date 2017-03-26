@@ -178,7 +178,7 @@ int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header
     int posicao = 0, i=0;
     char comando[15],endereco[100];
     
-    comando=SeparadordeComando(char comando[], int posicao);
+    comando=SeparadordeComando(char &comando[], int &posicao);
     
     if(strcmp(comando, "EXIT") == 0)
 	{
@@ -187,7 +187,7 @@ int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header
 	}
     else if(strcmp(comando, "DIR") == 0)
 	{	
-		endereco=SeparadordeComando(char endereco[], int posicao);
+		endereco=SeparadordeComando(char &endereco[], int &posicao);
 		//DIR(endereco, raiz, &(*diskatual), &(*diratual));
 	}
     else if(strcmp(comando, "CLS") == 0)
@@ -195,5 +195,23 @@ int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header
 		system("cls");
 		printf("\n");
 	}
+    else if(strcmp(comando, "CD") == 0)
+	{}
+    else if(strcmp(comando, "MD") == 0)
+	{}
+    else if(strcmp(comando, "RD") == 0)
+	{}
+    else if(strcmp(comando, "COPY CON") == 0)
+	{}
+    else if(strcmp(comando, "COPY") == 0)
+	{}
+    else if(strcmp(comando, "DEL") == 0)
+	{}
+    else if(strcmp(comando, "TYPE") == 0)
+	{}
+    else if(strcmp(comando, "FIND") == 0)
+	{}
+    else if(strcmp(comando, "FC") == 0)
+	{}
     return 1;
 }
