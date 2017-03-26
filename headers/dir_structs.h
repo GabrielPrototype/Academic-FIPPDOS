@@ -104,10 +104,14 @@ char dir_delete_allfiles(Dir_header *Dir) {
 
 char dir_delete_rec(Dir_header **Dir_top, Dir_header **Dir) {
 
+    Dir_header *aux;
     while ((*Dir)->Head != NULL) {
-
-        dir_delete_rec(&(*Dir), &(*Dir)->Head);
+        aux = (*Dir)->Head;
+        (*Dir)->Head = aux->Tail;
+        dir_delete_rec(&(*Dir), &aux);
+        
     }
+    (*Dir)->Head = NULL;
     dir_delete_allfiles(Dir_header * Dir);
     free(*Dir);
 };
