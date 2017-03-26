@@ -21,11 +21,17 @@
 /*
  * 
  */
+int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header *diratual);
+
 int main(int argc, char** argv) {
-    
+    char linhac[255];
+    int execute;
     time_t t = time(NULL);
     struct tm *tempo = localtime(&t);
     struct tm tempo2 = *tempo
+    Disk_unit *diskselec;
+    Disk_unit *raiz;
+    Dir_header *dirselec;
     
     printf("F.I.P.P. DOS");
     
@@ -49,6 +55,15 @@ int main(int argc, char** argv) {
     }
     getchar();
     return (EXIT_SUCCESS);
+    do
+    {
+	//exibe os atuais
+	fflush(stdin);
+	gets(linhac);
+		
+	execute = interpretador(char linhac[],Disk_unit *raiz,Disk_unit *diskselec,Dir_header *dirselec);
+                
+    }while(execute>0);
 
 }
 
@@ -58,7 +73,6 @@ int main(int argc, char** argv) {
 void diskunit_test(void) {
 
     Disk_unit *ldisk = NULL, *aux = NULL, *aux2 = NULL;
-
     for (char letra = 'A'; letra <= 'Z'; letra++) {
         diskunit_init(&aux, (char) letra);
         diskunit_insert(&ldisk, &aux);
@@ -111,8 +125,7 @@ void diskunit_test(void) {
         printf("unidade %c:\n", aux->unidade);
     }
 
-    printf("\n",
-            "\nInserindo de forma reversa e ordenando automaticamente");
+    printf("\n\nInserindo de forma reversa e ordenando automaticamente");
     for (char letra = 'Z'; letra >= 'A'; letra--) {
         diskunit_init(&aux, (char) letra);
         diskunit_insert(&ldisk, &aux);
@@ -130,6 +143,7 @@ void diskunit_test(void) {
 
     if (!ldisk)
         printf("Lista vazia\n");
+    
 };
 
 //função para teste da funções relacionadas a diretorios
