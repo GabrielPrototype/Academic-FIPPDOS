@@ -114,7 +114,7 @@ char dir_Delete(Dir_header **Dir_top, char Dir_name[]) {
             //deleta o arquivo
     }
     
-    if ((*Dir_top)->Head == dir && dir_ant == Dir_top ) {//primeiro e unico
+    if ((*Dir_top)->Head == dir && dir->Tail==NULL ) {//primeiro e unico
         
         free(dir);
         (*Dir_top)->Head == NULL;
@@ -126,8 +126,9 @@ char dir_Delete(Dir_header **Dir_top, char Dir_name[]) {
         free(dir);
     
     } else { // com vizinhos a esquerda
-    
-    
+        aux=dir->Tail;
+        dir_ant=aux;
+        free(dir);
     }
 }
 #endif /* DIR_STRUCTS_H */
