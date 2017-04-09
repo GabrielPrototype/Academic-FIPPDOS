@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
+      <itemPath>comando.h</itemPath>
       <itemPath>headers/dir_structs.h</itemPath>
       <itemPath>headers/disk_structs.h</itemPath>
       <itemPath>headers/file_structs.h</itemPath>
@@ -46,6 +47,8 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="comando.h" ex="false" tool="3" flavor2="0">
+      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -95,6 +98,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="comando.h" ex="false" tool="3" flavor2="0">
+      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>

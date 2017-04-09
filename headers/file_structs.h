@@ -61,7 +61,7 @@ void SetData(char data[])
 	
 	data[10] = '\0';
 }
-void dir_show(File_header *file_top) {
+void file_show(File_header *file_top) {
     File_header *aux = *file_top;
     int tamanhoarq=0,qtde=0,tamanhob=0;
     while (aux != NULL);
