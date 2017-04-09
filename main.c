@@ -40,21 +40,21 @@ int main(int argc, char** argv) {
 
     printf("\nnow: %d-%d-%d %d:%d:%d\n", tempo2.tm_year + 1900, tempo2.tm_mon + 1, tempo2.tm_mday, tempo2.tm_hour, tempo2.tm_min, tempo2.tm_sec);
 
-    //printf("\n\nMah oi, qual o sistema patricia?\n");
-    //qualosistemapatricia();
-    //diskunit_test();
-    printf("\n");
-    char info = 'a';
-    char *L1;
-    char *L2;
-
-    L2 = NULL;
-
-    if (!((L1 == NULL) && (L2 == NULL))) {
-        printf("Diferentes");
-    }
-    getchar();
-    return (EXIT_SUCCESS);
+//    //printf("\n\nMah oi, qual o sistema patricia?\n");
+//    //qualosistemapatricia();
+//    //diskunit_test();
+//    printf("\n");
+//    char info = 'a';
+//    char *L1;
+//    char *L2;
+//
+//    L2 = NULL;
+//
+//    if (!((L1 == NULL) && (L2 == NULL))) {
+//        printf("Diferentes");
+//    }
+//    getchar();
+//    return (EXIT_SUCCESS);
     do {
         //exibe os atuais
         fflush(stdin);
@@ -171,8 +171,32 @@ char SeparadordeComando(char *com[], int *pos) {
     strcpy(com, strupr(com));
     return com;
 }
-char separaBarra(char *com[], int *pos)
-{}
+
+Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta) {
+    char nomep[30];
+    int i = 3, pos = 0;
+    Dir_header *p = NULL;
+
+    while (com[i] != '\0' && pasta != NULL) {
+        if (com[i] != '\\') {
+            nomep[pos] = com[i];
+            pos++;
+        }
+        if (com[i] == '\\' || com[i + 1] == '\0') {
+            nomep[pos] = '\0';
+
+            p = dir_find_dir(pasta, nomep[]);
+
+            //desce para uma subpasta se houver
+            if (p != NULL && com[i] == '\\' && com[i + 1] != '\0' && com[i + 1] != ' ') {
+                p = p->Head;
+            }
+            pos = 0;
+        }
+        i++;
+    }
+    return p;
+}
 
 void DIR(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
     Disk_unit *uAUX = NULL;
@@ -193,16 +217,41 @@ void DIR(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header 
             aAUX = (*pastaSelec)->ListaArq;
             dir_show(aAUX);
         }
-    } else if (endereco[1] == ':' && endereco[2] == '\\') 
-    { //DIR - procura o disco, depois procura o diretorio, exibe
-        uAUX=diskunit_find(unidadeSelec,endereco[0]);
-        if(uAUX!=NULL)
-        {
-            
-        }
-        else
-        {
+    } else if (endereco[1] == ':' && endereco[2] == '\\') { //DIR - procura o disco, depois procura o diretorio, exibe
+        uAUX = diskunit_find(unidadeSelec, endereco[0]);
+        if (uAUX != NULL) {
+            pAUX = uAUX->iniDir->Head;
+            pAUX = separaeprocuraPasta(endereco[], pAUX);
+            if (pAUX == NULL) {
+                printf("\nErro, pasta nao encontrada.");
+            } else {
+                pAUX2 = pAUX->Head;
+                printf("\n%s  %s    <DIR>          .", data, hora);
+                printf("\n%s  %s    <DIR>          ..", data, hora);
+                dir_show(pAUX2);
+                if (pAUX->ListaArq != NULL) {
+                    aAUX = pAUX->ListaArq;
+                    file_show(aAUX);
+                }
+            }
+        } else {
             printf("\nErro, unidade nao encontrada.");
+        }
+
+    } else {//DIR  - procura uma sub pasta partindo da pasta atual e exibe seu conteudo
+        pAUX = (*pastaSelec)->Head;
+        pAUX = separaeprocuraPasta(endereco[], pAUX);
+        if (pAUX == NULL) {
+            printf("\nErro, pasta nao encontrada.");
+        } else {
+            pAUX2 = pAUX->Head;
+            printf("\n%s  %s    <DIR>          .", data, hora);
+            printf("\n%s  %s    <DIR>          ..", data, hora);
+            dir_show(pAUX2);
+            if (pAUX->ListaArq != NULL) {
+                aAUX = pAUX->ListaArq;
+                file_show(aAUX);
+            }
         }
     }
 }
