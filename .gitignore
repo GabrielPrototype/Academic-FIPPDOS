@@ -33,3 +33,5 @@
 *.su
 /dist/
 /build/
+/nbprojetc/private/
+/nbprojetc/private/*
