@@ -21,7 +21,7 @@
 /*
  * 
  */
-int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header *diratual);
+int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
 
 int main(int argc, char** argv) {
     char linhac[255];
@@ -32,11 +32,11 @@ int main(int argc, char** argv) {
     Disk_unit *diskselec;
     Disk_unit *raiz;
     Dir_header *dirselec;
-    
+
     printf("F.I.P.P. DOS");
-    
-    
-    
+
+
+
 
     printf("\nnow: %d-%d-%d %d:%d:%d\n", tempo2.tm_year + 1900, tempo2.tm_mon + 1, tempo2.tm_mday, tempo2.tm_hour, tempo2.tm_min, tempo2.tm_sec);
 
@@ -55,15 +55,14 @@ int main(int argc, char** argv) {
     }
     getchar();
     return (EXIT_SUCCESS);
-    do
-    {
-	//exibe os atuais
-	fflush(stdin);
-	gets(linhac);
-		
-	execute = interpretador(char linhac[],Disk_unit *raiz,Disk_unit *diskselec ,Dir_header *dirselec);
-                
-    }while(execute>0);
+    do {
+        //exibe os atuais
+        fflush(stdin);
+        gets(linhac);
+
+        execute = interpretador(char linhac[], Disk_unit *raiz, Disk_unit *diskselec, Dir_header * dirselec);
+
+    } while (execute > 0);
 
 }
 
@@ -143,7 +142,7 @@ void diskunit_test(void) {
 
     if (!ldisk)
         printf("Lista vazia\n");
-    
+
 };
 
 //função para teste da funções relacionadas a diretorios
@@ -156,62 +155,82 @@ void dir_test(void) {
     dir_insert_diretorio(&test_C, aux);
 
 }
-char SeparadordeComando(char *com[], int *pos)
-{
-    int i=0;
+
+char SeparadordeComando(char *com[], int *pos) {
+    int i = 0;
     //Ignora "espaços" antes do inicio do comando
-	while(com[pos] == ' ')
-		pos++;
-	//localiza comando
-	while(com[pos] != '\0' && com[pos] != ' ')
-	{
-		com[i] = com[pos];
-		i++;
-		pos++;
-	}
-	com[i] = '\0';
-	strcpy(com, strupr(com));
+    while (com[pos] == ' ')
+        pos++;
+    //localiza comando
+    while (com[pos] != '\0' && com[pos] != ' ') {
+        com[i] = com[pos];
+        i++;
+        pos++;
+    }
+    com[i] = '\0';
+    strcpy(com, strupr(com));
     return com;
 }
-int interpretador(char comando[],Disk_unit *raiz,Disk_unit *diskatual,Dir_header *diratual)
-{
-    int posicao = 0, i=0;
-    char comando[15],endereco[100];
-    
-    comando=SeparadordeComando(char &comando[], int &posicao);
-    
-    if(strcmp(comando, "EXIT") == 0)
-	{
-		printf("\n\nEXIT");
-		return 0;
-	}
-    else if(strcmp(comando, "DIR") == 0)
-	{	
-		endereco=SeparadordeComando(char &endereco[], int &posicao);
-		//DIR(endereco, raiz, &(*diskatual), &(*diratual));
-	}
-    else if(strcmp(comando, "CLS") == 0)
-	{	
-		system("cls");
-		printf("\n");
-	}
-    else if(strcmp(comando, "CD") == 0)
-	{}
-    else if(strcmp(comando, "MD") == 0)
-	{}
-    else if(strcmp(comando, "RD") == 0)
-	{}
-    else if(strcmp(comando, "COPY CON") == 0)
-	{}
-    else if(strcmp(comando, "COPY") == 0)
-	{}
-    else if(strcmp(comando, "DEL") == 0)
-	{}
-    else if(strcmp(comando, "TYPE") == 0)
-	{}
-    else if(strcmp(comando, "FIND") == 0)
-	{}
-    else if(strcmp(comando, "FC") == 0)
-	{}
+char separaBarra(char *com[], int *pos)
+{}
+
+void DIR(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
+    Disk_unit *uAUX = NULL;
+    Dir_header *pAUX = NULL, *pAUX2;
+    File_header *aAUX = NULL;
+
+    char data[9], hora[5];
+    SetData(data);
+    SetHora(hora);
+    if (endereco[0] == '\0') { //DIR VAZIO - exibe diretorio atual, subpasta(s) e arquivo(s)
+        pAUX = (*pastaSelec)->Head;
+
+        printf("\n%s  %s    <DIR>          .", data, hora);
+        printf("\n%s  %s    <DIR>          ..", data, hora);
+        dir_show(pAUX);
+        if ((*pastaSelec)->ListaArq != NULL)//pasta possui arquivos
+        {
+            aAUX = (*pastaSelec)->ListaArq;
+            dir_show(aAUX);
+        }
+    } else if (endereco[1] == ':' && endereco[2] == '\\') 
+    { //DIR - procura o disco, depois procura o diretorio, exibe
+        uAUX=diskunit_find(unidadeSelec,endereco[0]);
+        if(uAUX!=NULL)
+        {
+            
+        }
+        else
+        {
+            printf("\nErro, unidade nao encontrada.");
+        }
+    }
+}
+
+int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual) {
+    int posicao = 0, i = 0;
+    char comando[15], endereco[100];
+
+    comando = SeparadordeComando(char &comando[], int &posicao);
+
+    if (strcmp(comando, "EXIT") == 0) {
+        printf("\n\nEXIT");
+        return 0;
+    } else if (strcmp(comando, "DIR") == 0) {
+        endereco = SeparadordeComando(char &endereco[], int &posicao);
+        DIR(endereco, raiz, &(*diskatual), &(*diratual));
+    } else if (strcmp(comando, "CLS") == 0) {
+        system("cls");
+        printf("\n");
+    } else if (strcmp(comando, "CD") == 0) {
+    } else if (strcmp(comando, "MD") == 0) {
+    } else if (strcmp(comando, "RD") == 0) {
+    } else if (strcmp(comando, "COPY CON") == 0) {
+    } else if (strcmp(comando, "COPY") == 0) {
+    } else if (strcmp(comando, "DEL") == 0) {
+    } else if (strcmp(comando, "TYPE") == 0) {
+    } else if (strcmp(comando, "FIND") == 0) {
+    } else if (strcmp(comando, "FC") == 0) {
+    }
     return 1;
 }

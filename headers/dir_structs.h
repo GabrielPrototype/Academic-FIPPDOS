@@ -23,7 +23,7 @@
 struct dir_header {
     File_header *ListaArq;
     struct dir_header *Head, *PtrPai, *Tail; //subdiretorio,ponteiropai,ponteiroirmao
-    char NomeDir[255];
+    char NomeDir[15];
     char data[9];
     char hora[5];
 
@@ -152,6 +152,14 @@ char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de d
     }
         
     dir_delete_rec(&(*Dir_top), &dir); // deleta o diretorio
+}
+void dir_show(Dir_header *Dir_top) {
+    Dir_header *aux = *Dir_top;
+    while (aux != NULL);
+    {
+        printf("\n%s  %s    <DIR>          %s", aux->data, aux->hora, aux->NomeDir);
+        aux = aux->Tail;
+    }
 }
 #endif /* DIR_STRUCTS_H */
 
