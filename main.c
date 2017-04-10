@@ -21,10 +21,11 @@
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
 #include "headers/teste_detect_os.h"
-#include "headers/commands.h"
+
 /*
  * 
  */
+
 int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
 char SeparadordeComando(char *com, int *pos);
 
@@ -41,8 +42,8 @@ int main(int argc, char** argv) {
 
     do {
         //exibe os atuais
-        fflush(stdin);
-        gets(linhac);
+        fippdos_fflush();
+        fippdos_fgets(linhac);
 
         execute = interpretador(char *linhac, Disk_unit *raiz, Disk_unit *diskselec, Dir_header *dirselec);
 

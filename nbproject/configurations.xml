@@ -4,23 +4,38 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
-      <itemPath>headers/commands.h</itemPath>
       <itemPath>headers/crossplatform_fuctions.h</itemPath>
       <itemPath>headers/dir_structs.h</itemPath>
       <itemPath>headers/disk_structs.h</itemPath>
       <itemPath>headers/errors_codes.h</itemPath>
       <itemPath>headers/file_structs.h</itemPath>
+      <itemPath>headers/fippdos_util.h</itemPath>
       <itemPath>headers/teste_detect_os.h</itemPath>
       <itemPath>tests/testes.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
+      <itemPath>commands.c</itemPath>
+      <itemPath>dir_functions.c</itemPath>
+      <itemPath>disk_functions.c</itemPath>
+      <itemPath>file_functions.c</itemPath>
       <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"
                    projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Arquivos de Teste"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Arquivos Importantes"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Arquivos de Teste"
@@ -47,7 +62,13 @@
           <standard>10</standard>
         </cTool>
       </compileType>
-      <item path="headers/commands.h" ex="false" tool="3" flavor2="0">
+      <item path="commands.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dir_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="disk_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="file_functions.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="headers/crossplatform_fuctions.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -58,6 +79,8 @@
       <item path="headers/errors_codes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/fippdos_util.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/teste_detect_os.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -87,7 +110,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="headers/commands.h" ex="false" tool="3" flavor2="0">
+      <item path="commands.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dir_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="disk_functions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="file_functions.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="headers/crossplatform_fuctions.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -98,6 +127,8 @@
       <item path="headers/errors_codes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/fippdos_util.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/teste_detect_os.h" ex="false" tool="3" flavor2="0">
       </item>

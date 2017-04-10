@@ -35,6 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/commands.o \
+	${OBJECTDIR}/dir_functions.o \
+	${OBJECTDIR}/disk_functions.o \
+	${OBJECTDIR}/file_functions.o \
 	${OBJECTDIR}/main.o
 
 
@@ -61,6 +65,26 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/fippdos: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/fippdos ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/commands.o: commands.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/commands.o commands.c
+
+${OBJECTDIR}/dir_functions.o: dir_functions.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dir_functions.o dir_functions.c
+
+${OBJECTDIR}/disk_functions.o: disk_functions.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/disk_functions.o disk_functions.c
+
+${OBJECTDIR}/file_functions.o: file_functions.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/file_functions.o file_functions.c
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}

@@ -17,7 +17,6 @@
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
 #include "headers/teste_detect_os.h"
-#include "headers/commands.h"
 
 void tempo_test(void) {
 

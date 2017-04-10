@@ -22,18 +22,30 @@ void clear_screen_cplat(){
     system("cls");
     printf("\n");
 };
+
+char fippdos_fflush(){
+    fflush(stdin)
+};
 #elif _WIN32
     //define something for Windows (32-bit and 64-bit, this part is common)
 void clear_screen_cplat(){
     system("cls");
     printf("\n");
 };
- 
+
+char fippdos_fflush(){
+    fflush(stdin)
+};
+
 #elif __linux__
     // linux
 void clear_screen_cplat(){
     system("clear");
     printf("\n");
+};
+
+char fippdos_fflush(){
+    __fpurge(stdin);
 };
 #elif __unix__ // all unices not caught above
     // Unix
