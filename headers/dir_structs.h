@@ -50,7 +50,7 @@ void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) 
 //
 //}
 
-void dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
+char dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
     Dir_header *aux, *ant;
     //verificar se e a unica pasta dentro do pai se nao inserir ordenado
     if ((*Dir_top)->Head == NULL) {
