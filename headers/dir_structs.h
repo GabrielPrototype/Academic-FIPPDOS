@@ -112,14 +112,15 @@ char dir_delete_rec(Dir_header **Dir_top, Dir_header **Dir) {
         aux = (*Dir)->Head;
         (*Dir)->Head = aux->Tail;
         dir_delete_rec(&(*Dir), &aux);
-        
+
     }
     (*Dir)->Head = NULL;
-    dir_delete_allfiles(Dir_header * Dir);
+    dir_delete_allfiles(*Dir);
     free(*Dir);
 };
 
 char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de diretorios recursivamente
+
     Dir_header *dir, *dir_ant, *aux;
 
     dir_ant = *Dir_top;
@@ -136,10 +137,10 @@ char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de d
 
 
     { // Bloco para remoção do Dir da lista.
-        
+
         if ((*Dir_top)->Head == dir && dir->Tail == NULL) {//primeiro e unico
 
-            (*Dir_top)->Head == NULL;
+            (*Dir_top)->Head = NULL;
 
         } else if (Dir_top->Head == dir) { //primeiro, mas com vizinhos a direita.
 
@@ -153,7 +154,7 @@ char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de d
             //free(dir);
         }
     }
-        
+
     dir_delete_rec(&(*Dir_top), &dir); // deleta o diretorio
 }
 

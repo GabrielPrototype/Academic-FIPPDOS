@@ -42,7 +42,11 @@ struct file_header {
     struct file_content_line *ConteudoArq;
 };
 
+typedef struct file_content_letter File_content_letter;
+typedef struct file_content_line File_content_line;
 typedef struct file_header File_header;
+
+
 
 void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
 
@@ -84,22 +88,76 @@ void file_insert_in_dir(Dir_header **dir_top, File_header **file_h) {
 
 void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {
 
+    File_header *aux = *dir_top;
+
+    while (aux->prox != NULL && strcmp(aux->NomeArq, file_name) > 0);
+    {
+        aux = aux->prox;
+    }
+
+    if (strcmp(aux->NomeArq, file_name) == 0)
+        return aux;
+
+    return NULL;
+
 };
 
-void file_delete_dinamicstring_line(void) {
+void file_delete_string_line(void) {
 
 };
 
-void file_delete_all_lines(void) {
-
+void file_delete_all_lines(File_content_line **lista) {
+    Disk_unit *aux;
+    while ((*lista)) {
+        aux = *lista;
+        diskunit_delete(&(*lista), &aux);
+    }
 };
 
-void file_delete(Dir_header **Dir_top, File_header **file) {
+void file_delete(File_header **lista_arq, File_header **file) {
+    File_header *aux;
 
+    file_delete_all_lines(&(*file)->ConteudoArq);
+    free(*file);
 };
 
-void file_Delete_byname(Dir_header **Dir_top, char file_name[]) {
+void file_Delete_byname(File_header **lista_arq, char file_name[]) {
 
+    File_header *file, *file_ant, *aux;
+
+    file_ant = *lista_arq;
+    file = *lista_arq;
+
+    while (file->prox != NULL && strcmp(file->NomeArq, file_name) > 0);
+    {
+        file_ant = file;
+        file = file->prox;
+    }
+
+    if (strcmp(file->NomeArq, file_name) != 0) // arquivo não encontrado
+        return ERROR_FILE_NOT_FOUND;
+
+
+    { // Bloco para remoção do Dir da lista.
+
+        if (lista_arq == file && file->prox == NULL) {//primeiro e unico
+
+            lista_arq = NULL;
+
+        } else if (lista_arq == file) { //primeiro, mas com vizinhos a direita.
+
+            aux = file->prox;
+            *lista_arq = aux;
+
+        } else { // no meio ou no final
+
+            aux = file->prox;
+            file_ant = aux;
+            //free(dir);
+        }
+    }
+
+    file_delete_rec(&(*lista_arq), &file); // deleta o diretorio
 };
 
 /*novos codigos aqui, antes do FILE_STRUCTS_H*/
