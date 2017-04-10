@@ -103,6 +103,8 @@ int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_hea
     } else if (strcmp(comando, "CLS") == 0) {
         command_CLS();
     } else if (strcmp(comando, "CD") == 0) {
+        endereco = SeparadordeComando(char &endereco[], int &posicao);
+        command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
     } else if (strcmp(comando, "MD") == 0) {
     } else if (strcmp(comando, "RD") == 0) {
     } else if (strcmp(comando, "COPY CON") == 0) {
