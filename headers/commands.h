@@ -239,5 +239,23 @@ void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_
     }
     printf("\n\n");
 }
+
+void command_MD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
+    Disk_unit *uAUX = NULL;
+    Dir_header *pAUX = NULL;
+    if (endereco[0] == '\0') { //MD vazio 
+        printf("A sintaxe do comando esta incorreta.");
+    } else if (endereco[1] == ':' && endereco[2] == '\\') {
+        uAUX = diskunit_find(raiz, endereco[0]);
+        if (uAUX == NULL) {
+            printf("O sistema nao pode encontrar o caminho especificado.");
+        }
+        else
+        {
+            //procura pasta
+            
+        }
+    }
+}
 #endif /* COMMANDS_H */
 

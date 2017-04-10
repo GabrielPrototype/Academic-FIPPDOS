@@ -16,6 +16,10 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
 #include "dir_structs.h"
 
 struct disk_unit {

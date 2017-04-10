@@ -15,6 +15,11 @@
 #define FILE_STRUCTS_H
 
 #include "dir_structs.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
 
 
 struct file_content_letter {
