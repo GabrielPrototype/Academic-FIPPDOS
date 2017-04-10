@@ -16,7 +16,6 @@
 
 #include "dir_structs.h"
 
-
 struct file_content_letter {
     struct file_content_letter *ant, *prox;
     char letra;
@@ -40,18 +39,18 @@ typedef struct file_header File_header;
 
 void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
 
-    (*PtrFile) = (file_header*) malloc(sizeof (Dir_header));
+    (*PtrFile)File_header*) malloc(sizeof (Dir_header));
     strncpy((*PtrFile)->NomeArq, nome, 254);
     (*PtrFile)->data[0] = data;
     (*PtrFile)->hora[0] = hora;
 };
 
-void file_insert_in_dir(void) {
-    
+void file_insert_in_dir(Dir_header **dir_top, File_header *file_h) {
+
 };
 
-void *file_find_in_dir(Dir_header **Dir_top, char file_name[]) {
-    
+void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {
+
 };
 
 void file_delete_dinamicstring_line(void) {
@@ -66,8 +65,8 @@ void file_delete(Dir_header **Dir_top, File_header **file) {
 
 };
 
-void file_Delete_byname(Dir_header **Dir_top, char file_name[]) { 
-    
+void file_Delete_byname(Dir_header **Dir_top, char file_name[]) {
+
 };
 
 /*novos codigos aqui, antes do FILE_STRUCTS_H*/
