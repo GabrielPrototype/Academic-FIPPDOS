@@ -16,6 +16,10 @@
 
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
 #include "file_structs.h"
 
 #define ERROR_DIR_NOT_FOUND -10;

@@ -11,8 +11,12 @@
  * Created on 12 de Março de 2017, 01:48
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
 
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
@@ -92,19 +96,19 @@ int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_hea
     int posicao = 0, i = 0;
     char comando[15], endereco[100];
 
-    comando = SeparadordeComando(char &comando[], int &posicao);
+    comando = SeparadordeComando(&comando[],&posicao[]);
 
     if (strcmp(comando, "EXIT") == 0) {
         printf("\n\nEXIT");
         return 0;
     } else if (strcmp(comando, "DIR") == 0) {
-        endereco = SeparadordeComando(char &endereco[], int &posicao);
+        endereco = SeparadordeComando(&endereco[],&posicao[]);
         command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
     } else if (strcmp(comando, "CLS") == 0) {
         command_CLS();
     } else if (strcmp(comando, "CD") == 0) {
-        endereco = SeparadordeComando(char &endereco[], int &posicao);
-        command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
+        endereco = SeparadordeComando(&endereco[],&posicao[]);
+        command_CD(endereco, raiz, &(*diskatual), &(*diratual));
     } else if (strcmp(comando, "MD") == 0) {
     } else if (strcmp(comando, "RD") == 0) {
     } else if (strcmp(comando, "COPY CON") == 0) {
