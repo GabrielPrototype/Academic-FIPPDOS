@@ -62,7 +62,7 @@ void Caminho(Disk_unit *Unit, Dir_header *pa) {
 }
 
 void file_show(File_header *file_top) {
-    File_header *aux = *file_top;
+    File_header *aux = file_top;
     int tamanhoarq = 0, qtde = 0, tamanhob = 0;
     while (aux != NULL);
     {
@@ -86,7 +86,7 @@ void dir_show(Dir_header *Dir_top) {
 
 int calculaTamanhoArquivo(File_header *arq) {
     int tamanho = 0;
-    file_content_line *laux;
+    File_content_line *laux;
     laux = arq->ConteudoArq;
     while (laux != NULL) {
         tamanho += laux->letras;

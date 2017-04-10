@@ -66,10 +66,10 @@ void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) 
     strncpy((*PtrFile)->NomeArq, nome, 254);
     strncpy((*PtrFile)->data, data, 9);
     strncpy((*PtrFile)->hora, hora, 5);
-    *PtrFile->prox = NULL;
+    (*PtrFile)->prox = NULL;
 };
 
-void file_insert_in_dir(Dir_header **dir_top, File_header **file_h) {
+char file_insert_in_dir(Dir_header **dir_top, File_header **file_h) {
 
     File_header *aux, *ant;
     //verificar se e a unica pasta dentro do pai se nao inserir ordenado
@@ -152,7 +152,7 @@ void file_delete_line(File_content_line **lista, File_content_line **linha) {
             (*linha)->bottom->top = (*linha)->top;
     }
 
-    file_delete_string_line(&(lista)->letras)
+    file_delete_string_line(&(*lista)->letras);
     free((*linha));
 
 };
@@ -172,7 +172,7 @@ void file_delete(File_header **lista_arq, File_header **file) {
     free(*file);
 };
 
-void file_Delete_byname(File_header **lista_arq, char file_name[]) {
+char file_Delete_byname(File_header **lista_arq, char file_name[]) {
 
     File_header *file, *file_ant, *aux;
 

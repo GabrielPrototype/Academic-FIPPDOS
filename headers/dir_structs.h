@@ -99,7 +99,7 @@ Dir_header *dir_find_dir(Dir_header **Dir_top, char Dir_name[]) {
 char dir_delete_allfiles(Dir_header *Dir) {
 
     //repetiçao para deletar arquivos
-    while (Dir->ListaArq() != NULL) {
+    while (Dir->ListaArq != NULL) {
         //recebe primeiro arquivo
         //deleta o arquivo
     }
@@ -142,7 +142,7 @@ char dir_Delete_byname(Dir_header **Dir_top, char Dir_name[]) { //deleção de d
 
             (*Dir_top)->Head = NULL;
 
-        } else if (Dir_top->Head == dir) { //primeiro, mas com vizinhos a direita.
+        } else if ((*Dir_top)->Head == dir) { //primeiro, mas com vizinhos a direita.
 
             aux = dir->Tail;
             *Dir_top = aux;
