@@ -25,9 +25,8 @@
 /*
  * 
  */
-int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
-char SeparadordeComando(char *com[], int *pos);
-Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta);
+int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
+char SeparadordeComando(char *com, int *pos);
 
 int main(int argc, char** argv) {
     char linhac[255];
@@ -45,14 +44,14 @@ int main(int argc, char** argv) {
         fflush(stdin);
         gets(linhac);
 
-        execute = interpretador(char linhac[], Disk_unit *raiz, Disk_unit *diskselec, Dir_header * dirselec);
+        execute = interpretador(char *linhac, Disk_unit *raiz, Disk_unit *diskselec, Dir_header *dirselec);
 
     } while (execute > 0);
 
     return (EXIT_SUCCESS);
 }
 
-char SeparadordeComando(char *com[], int *pos) {
+char *SeparadordeComando(char *com, int *pos) {
     int i = 0;
     //Ignora "espaços" antes do inicio do comando
     while (com[pos] == ' ')
@@ -68,57 +67,31 @@ char SeparadordeComando(char *com[], int *pos) {
     return com;
 }
 
-Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta) {
-    char nomep[30];
-    int i = 3, pos = 0;
-    Dir_header *p = NULL;
-
-    while (com[i] != '\0' && pasta != NULL) {
-        if (com[i] != '\\') {
-            nomep[pos] = com[i];
-            pos++;
-        }
-        if (com[i] == '\\' || com[i + 1] == '\0') {
-            nomep[pos] = '\0';
-
-            p = dir_find_dir(pasta, nomep[]);
-
-            //desce para uma subpasta se houver
-            if (p != NULL && com[i] == '\\' && com[i + 1] != '\0' && com[i + 1] != ' ') {
-                p = p->Head;
-            }
-            pos = 0;
-        }
-        i++;
-    }
-    return p;
-}
-
-int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual) {
+int interpretador(char* comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual) {
     int posicao = 0, i = 0;
-    char comando[15], endereco[100];
+    char comand[15], endereco[100];
 
-    comando = SeparadordeComando(&comando[],&posicao[]);
+    strcpy(comand,SeparadordeComando(comando,&posicao));
 
-    if (strcmp(comando, "EXIT") == 0) {
+    if (strcmp(comand, "EXIT") == 0) {
         printf("\n\nEXIT");
         return 0;
-    } else if (strcmp(comando, "DIR") == 0) {
-        endereco = SeparadordeComando(&endereco[],&posicao[]);
+    } else if (strcmp(comand, "DIR") == 0) {
+        strcpy(endereco,SeparadordeComando(comando,&posicao));
         command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
-    } else if (strcmp(comando, "CLS") == 0) {
+    } else if (strcmp(comand, "CLS") == 0) {
         command_CLS();
-    } else if (strcmp(comando, "CD") == 0) {
-        endereco = SeparadordeComando(&endereco[],&posicao[]);
+    } else if (strcmp(comand, "CD") == 0) {
+        strcpy(endereco,SeparadordeComando(comando,&posicao));
         command_CD(endereco, raiz, &(*diskatual), &(*diratual));
-    } else if (strcmp(comando, "MD") == 0) {
-    } else if (strcmp(comando, "RD") == 0) {
-    } else if (strcmp(comando, "COPY CON") == 0) {
-    } else if (strcmp(comando, "COPY") == 0) {
-    } else if (strcmp(comando, "DEL") == 0) {
-    } else if (strcmp(comando, "TYPE") == 0) {
-    } else if (strcmp(comando, "FIND") == 0) {
-    } else if (strcmp(comando, "FC") == 0) {
+    } else if (strcmp(comand, "MD") == 0) {
+    } else if (strcmp(comand, "RD") == 0) {
+    } else if (strcmp(comand, "COPY CON") == 0) {
+    } else if (strcmp(comand, "COPY") == 0) {
+    } else if (strcmp(comand, "DEL") == 0) {
+    } else if (strcmp(comand, "TYPE") == 0) {
+    } else if (strcmp(comand, "FIND") == 0) {
+    } else if (strcmp(comand, "FC") == 0) {
     }
     return 1;
 }

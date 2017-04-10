@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=academic-fippdos
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/academic-fippdos
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=academic-fippdos.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/academic-fippdos.tar
+CND_PLATFORM_Debug=MinGW-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
+CND_ARTIFACT_NAME_Debug=fippdos
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/fippdos
+CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
+CND_PACKAGE_NAME_Debug=fippdos.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/fippdos.tar
 # Release configuration
-CND_PLATFORM_Release=GNU-Linux
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=academic-fippdos
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/academic-fippdos
-CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=academic-fippdos.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/academic-fippdos.tar
+CND_PLATFORM_Release=MinGW-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
+CND_ARTIFACT_NAME_Release=fippdos
+CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/fippdos
+CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
+CND_PACKAGE_NAME_Release=fippdos.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/fippdos.tar
 #
 # include compiler specific variables
 #
