@@ -26,6 +26,8 @@
  * 
  */
 int interpretador(char comando[], Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
+char SeparadordeComando(char *com[], int *pos);
+Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta);
 
 int main(int argc, char** argv) {
     char linhac[255];
