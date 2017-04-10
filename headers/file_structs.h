@@ -46,9 +46,23 @@ typedef struct file_content_letter File_content_letter;
 typedef struct file_content_line File_content_line;
 typedef struct file_header File_header;
 
+void init_file_content_letter(File_content_letter **ptrLetra, char *letra) {
+    (*ptrLetra) = (File_content_letter*) malloc(sizeof (File_content_letter));
+    (*ptrLetra)->ant = NULL;
+    (*ptrLetra)->prox = NULL;
+    (*ptrLetra)->letra = letra;
+};
+
+void init_file_content_line(File_content_line **ptrLinha, int *numletras) {
+    (*ptrLinha) = (File_content_letter*) malloc(sizeof (File_content_letter));
+    (*ptrLinha)->top = NULL;
+    (*ptrLinha)->bottom = NULL;
+    (*ptrLinha)->letras = numletras;
+};
+
 void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
 
-    (*PtrFile) = (File_header*) malloc(sizeof (Dir_header));
+    (*PtrFile) = (File_header*) malloc(sizeof (File_header));
     strncpy((*PtrFile)->NomeArq, nome, 254);
     strncpy((*PtrFile)->data, data, 9);
     strncpy((*PtrFile)->hora, hora, 5);
@@ -101,7 +115,7 @@ void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {
 };
 
 void file_delete_letter(File_content_letter **lista, File_content_letter **letra) {
-    
+
     if (*lista == *letra) {
         *lista = (*letra)->prox;
         if ((*letra)->prox)
