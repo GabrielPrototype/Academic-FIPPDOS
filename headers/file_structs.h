@@ -46,8 +46,6 @@ typedef struct file_content_letter File_content_letter;
 typedef struct file_content_line File_content_line;
 typedef struct file_header File_header;
 
-
-
 void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
 
     (*PtrFile) = (File_header*) malloc(sizeof (Dir_header));
@@ -102,7 +100,46 @@ void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {
 
 };
 
-void file_delete_string_line(void) {
+void file_delete_letter(File_content_letter **lista, File_content_letter **letra) {
+    
+    if (*lista == *letra) {
+        *lista = (*letra)->prox;
+        if ((*letra)->prox)
+            (*lista)->ant = NULL;
+    } else {
+        if ((*letra)->ant != NULL)
+            (*letra)->ant->prox = (*letra)->prox;
+
+        if ((*letra)->prox != NULL)
+            (*letra)->prox->ant = (*letra)->ant;
+    }
+    free((*letra));
+};
+
+void file_delete_string_line(File_content_letter **lista) {
+    Disk_unit *aux;
+    while ((*lista)) {
+        aux = *lista;
+        file_delete_letter(&(*lista), &aux);
+    }
+};
+
+void file_delete_line(File_content_line **lista, File_content_line **linha) {
+
+    if (*lista == *linha) {
+        *lista = (*linha)->bottom;
+        if ((*linha)->bottom)
+            (*lista)->top = NULL;
+    } else {
+        if ((*linha)->top != NULL)
+            (*linha)->top->bottom = (*linha)->bottom;
+
+        if ((*linha)->bottom != NULL)
+            (*linha)->bottom->top = (*linha)->top;
+    }
+
+    file_delete_string_line(&(lista)->letras)
+    free((*linha));
 
 };
 
@@ -110,7 +147,7 @@ void file_delete_all_lines(File_content_line **lista) {
     Disk_unit *aux;
     while ((*lista)) {
         aux = *lista;
-        diskunit_delete(&(*lista), &aux);
+        file_delete_line(&(*lista), &aux);
     }
 };
 
@@ -157,7 +194,7 @@ void file_Delete_byname(File_header **lista_arq, char file_name[]) {
         }
     }
 
-    file_delete_rec(&(*lista_arq), &file); // deleta o diretorio
+    file_delete(&(*lista_arq), &file); // deleta o diretorio
 };
 
 /*novos codigos aqui, antes do FILE_STRUCTS_H*/
