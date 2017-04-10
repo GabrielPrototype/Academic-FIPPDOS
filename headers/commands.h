@@ -111,10 +111,10 @@ char SeparadordeComando(char *com[], int *pos) {
     return com;
 }
 
-Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta) {
+Dir_header separaeprocuraPasta(char *com, Dir_header *pasta) {
     char nomep[30];
     int i = 3, pos = 0;
-    Dir_header *p = NULL;
+    Dir_header *p=NULL;
 
     while (com[i] != '\0' && pasta != NULL) {
         if (com[i] != '\\') {
@@ -124,7 +124,7 @@ Dir_header separaeprocuraPasta(char *com[], Dir_header *pasta) {
         if (com[i] == '\\' || com[i + 1] == '\0') {
             nomep[pos] = '\0';
 
-            p = dir_find_dir(pasta, nomep[]);
+            p = dir_find_dir(pasta, nomep);
 
             //desce para uma subpasta se houver
             if (p != NULL && com[i] == '\\' && com[i + 1] != '\0' && com[i + 1] != ' ') {
@@ -215,12 +215,12 @@ void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_
             printf("O sistema nao encontra o caminho especificado.");
     } else if (endereco[1] == ':' && endereco[2] == '\\') { // cd muda os ponteiros se possivel
 
-        uAUX = diskunit_find(*raiz, endereco[0]);
+        uAUX = diskunit_find(raiz, endereco[0]);
         if (uAUX == NULL) {
             printf("O sistema nao pode encontrar o caminho especificado.");
         } else {
             pAUX = uAUX->iniDir->Head;
-            pAUX = separaeprocuraPasta(endereco, pAUX);
+            pAUX = separaeprocuraPasta(endereco,(*pAUX));
             if (pAUX == NULL) {
                 printf("\nErro, pasta nao encontrada.");
             } else {
@@ -230,7 +230,7 @@ void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_
         }
     } else {
         pAUX = (*pastaSelec)->Head;
-        pAUX = separaeprocuraPasta(endereco, pAUX);
+        pAUX = separaeprocuraPasta(endereco,(*pAUX));
         if (pAUX == NULL) {
             printf("\nErro, pasta nao encontrada.");
         } else {
