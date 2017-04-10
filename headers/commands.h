@@ -220,7 +220,7 @@ void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_
             printf("O sistema nao pode encontrar o caminho especificado.");
         } else {
             pAUX = uAUX->iniDir->Head;
-            pAUX = separaeprocuraPasta(endereco,(*pAUX));
+            pAUX = separaeprocuraPasta(endereco,pAUX);
             if (pAUX == NULL) {
                 printf("\nErro, pasta nao encontrada.");
             } else {
@@ -230,7 +230,7 @@ void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_
         }
     } else {
         pAUX = (*pastaSelec)->Head;
-        pAUX = separaeprocuraPasta(endereco,(*pAUX));
+        pAUX = separaeprocuraPasta(endereco,pAUX);
         if (pAUX == NULL) {
             printf("\nErro, pasta nao encontrada.");
         } else {
