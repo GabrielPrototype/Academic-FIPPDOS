@@ -38,6 +38,14 @@ struct file_header {
 
 typedef struct file_header File_header;
 
+void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
+
+    (*PtrFile) = (file_header*) malloc(sizeof (Dir_header));
+    strncpy((*PtrFile)->NomeArq, nome, 254);
+    (*PtrFile)->data[0] = data;
+    (*PtrFile)->hora[0] = hora;
+};
+
 void file_insert_in_dir(void) {
     
 };

@@ -4,13 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
-      <itemPath>tests/Testes.h</itemPath>
       <itemPath>headers/commands.h</itemPath>
       <itemPath>headers/crossplatform_fuctions.h</itemPath>
       <itemPath>headers/dir_structs.h</itemPath>
       <itemPath>headers/disk_structs.h</itemPath>
       <itemPath>headers/file_structs.h</itemPath>
       <itemPath>headers/teste_detect_os.h</itemPath>
+      <itemPath>tests/testes.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
@@ -57,7 +57,7 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="tests/Testes.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/testes.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -95,7 +95,7 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="tests/Testes.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/testes.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

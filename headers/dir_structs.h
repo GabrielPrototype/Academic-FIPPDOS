@@ -39,8 +39,8 @@ void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) 
     (*PtrDir)->ListaArq = NULL;
     (*PtrDir)->PtrPai = NULL;
     strncpy((*PtrDir)->NomeDir, nomeDir, 254);
-    (*PtrDir)->data[0] = data;
-    (*PtrDir)->hora[0] = hora;
+    strncpy((*PtrDir)->data, data, 254);
+    strncpy((*PtrDir)->data, data, 254);
 };
 
 //dir_header *Cons(Dir_header **Construcao) {
