@@ -21,6 +21,8 @@
 #include <ctype.h>
 #include <time.h>
 
+#include "errors_codes.h"
+
 struct file_content_letter {
     struct file_content_letter *ant, *prox;
     char letra;
@@ -46,12 +48,38 @@ void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) 
 
     (*PtrFile) = (File_header*) malloc(sizeof (Dir_header));
     strncpy((*PtrFile)->NomeArq, nome, 254);
-    (*PtrFile)->data[0] = data;
-    (*PtrFile)->hora[0] = hora;
+    strncpy((*PtrFile)->data, data, 9);
+    strncpy((*PtrFile)->hora, hora, 5);
+    *PtrFile->prox = NULL;
 };
 
-void file_insert_in_dir(Dir_header **dir_top, File_header *file_h) {
+void file_insert_in_dir(Dir_header **dir_top, File_header **file_h) {
 
+    File_header *aux, *ant;
+    //verificar se e a unica pasta dentro do pai se nao inserir ordenado
+    if ((*dir_top)->ListaArq == NULL) {
+        (*dir_top)->ListaArq = (*file_h);
+    } else {
+        if (strcmp((*file_h)->NomeArq, (*dir_top)->ListaArq->NomeArq) < 0) {
+            (*file_h)->prox = (*dir_top)->ListaArq;
+            (*dir_top)->ListaArq = (*file_h);
+        } else {
+            aux = (*dir_top)->ListaArq;
+            while (aux != NULL && strcmp(aux->NomeArq, (*file_h)->NomeArq) < 0) {
+                ant = aux;
+                aux = aux->prox;
+            }
+            if (strcmp(ant->NomeArq, (*file_h)->NomeArq) == 0 || strcmp(aux->NomeArq, (*file_h)->NomeArq) == 0) {
+                return ERROR_DUPLICATED_FILE; // não é possivel inserir diretorios duplicados
+            }
+            if (aux == NULL) { // insere no fim
+                ant->prox = *file_h;
+            } else { //insere no meio
+                ant->prox = (*file_h);
+                (*file_h)->prox = aux;
+            }
+        }
+    }
 };
 
 void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {

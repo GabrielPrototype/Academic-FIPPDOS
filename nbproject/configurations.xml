@@ -8,6 +8,7 @@
       <itemPath>headers/crossplatform_fuctions.h</itemPath>
       <itemPath>headers/dir_structs.h</itemPath>
       <itemPath>headers/disk_structs.h</itemPath>
+      <itemPath>headers/errors_codes.h</itemPath>
       <itemPath>headers/file_structs.h</itemPath>
       <itemPath>headers/teste_detect_os.h</itemPath>
       <itemPath>tests/testes.h</itemPath>
@@ -54,6 +55,8 @@
       </item>
       <item path="headers/disk_structs.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="headers/errors_codes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/teste_detect_os.h" ex="false" tool="3" flavor2="0">
@@ -91,6 +94,8 @@
       <item path="headers/dir_structs.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/disk_structs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="headers/errors_codes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="headers/file_structs.h" ex="false" tool="3" flavor2="0">
       </item>

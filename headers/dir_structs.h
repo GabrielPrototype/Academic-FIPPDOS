@@ -21,8 +21,7 @@
 #include <ctype.h>
 #include <time.h>
 #include "file_structs.h"
-
-#define ERROR_DIR_NOT_FOUND -10;
+#include "errors_codes.h"
 
 struct dir_header {
     File_header *ListaArq;
@@ -69,10 +68,10 @@ void dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
                 aux = aux->Tail;
             }
             if (strcmp(ant->NomeDir, (*Dir)->NomeDir) == 0 || strcmp(aux->NomeDir, (*Dir)->NomeDir) == 0) {
-                return -1; // não é possivel inserir diretorios duplicados
+                return ERROR_DUPLICATED_DIR; // não é possivel inserir diretorios duplicados
             }
             if (aux == NULL) { // insere no fim
-                ant->Tail = Dir;
+                ant->Tail = *Dir;
                 (*Dir)->PtrPai = (*Dir_top);
             } else { //insere no meio
                 ant->Tail = (*Dir);
