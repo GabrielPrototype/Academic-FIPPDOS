@@ -26,8 +26,8 @@
  * 
  */
 
-int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
-char SeparadordeComando(char *com, int *pos);
+//int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
+//char SeparadordeComando();
 
 int main(int argc, char** argv) {
     char linhac[255];
@@ -40,59 +40,59 @@ int main(int argc, char** argv) {
     printf("F.I.P.P. DOS");
 
 
-    do {
-        //exibe os atuais
-        fippdos_fflush();
-        fippdos_fgets(linhac);
-
-        execute = interpretador(char *linhac, Disk_unit *raiz, Disk_unit *diskselec, Dir_header *dirselec);
-
-    } while (execute > 0);
+//    do {
+//        //exibe os atuais
+//        fippdos_fflush();
+//        fippdos_fgets(linhac);
+//
+//        execute = interpretador(linhac, raiz, diskselec, dirselec);
+//
+//    } while (execute > 0);
 
     return (EXIT_SUCCESS);
-}
+};
 
-char *SeparadordeComando(char *com, int *pos) {
-    int i = 0;
-    //Ignora "espaços" antes do inicio do comando
-    while (com[pos] == ' ')
-        pos++;
-    //localiza comando
-    while (com[pos] != '\0' && com[pos] != ' ') {
-        com[i] = com[pos];
-        i++;
-        pos++;
-    }
-    com[i] = '\0';
-    strcpy(com, strupr(com));
-    return com;
-}
+//char * SeparadordeComando(char *com, int *pos) {
+//    int i = 0;
+//    //Ignora "espaços" antes do inicio do comando
+//    while (com[pos] == ' ')
+//        pos++;
+//    //localiza comando
+//    while (com[pos] != '\0' && com[pos] != ' ') {
+//        com[i] = com[pos];
+//        i++;
+//        pos++;
+//    }
+//    com[i] = '\0';
+//    strcpy(com, strupr(com));
+//    return com;
+//}
 
-int interpretador(char* comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual) {
-    int posicao = 0, i = 0;
-    char comand[15], endereco[100];
-
-    strcpy(comand,SeparadordeComando(comando,&posicao));
-
-    if (strcmp(comand, "EXIT") == 0) {
-        printf("\n\nEXIT");
-        return 0;
-    } else if (strcmp(comand, "DIR") == 0) {
-        strcpy(endereco,SeparadordeComando(comando,&posicao));
-        command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
-    } else if (strcmp(comand, "CLS") == 0) {
-        command_CLS();
-    } else if (strcmp(comand, "CD") == 0) {
-        strcpy(endereco,SeparadordeComando(comando,&posicao));
-        command_CD(endereco, raiz, &(*diskatual), &(*diratual));
-    } else if (strcmp(comand, "MD") == 0) {
-    } else if (strcmp(comand, "RD") == 0) {
-    } else if (strcmp(comand, "COPY CON") == 0) {
-    } else if (strcmp(comand, "COPY") == 0) {
-    } else if (strcmp(comand, "DEL") == 0) {
-    } else if (strcmp(comand, "TYPE") == 0) {
-    } else if (strcmp(comand, "FIND") == 0) {
-    } else if (strcmp(comand, "FC") == 0) {
-    }
-    return 1;
-}
+//int interpretador(char* comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual) {
+//    int posicao = 0, i = 0;
+//    char comand[15], endereco[100];
+//
+//    strcpy(comand,SeparadordeComando(comando,&posicao));
+//
+//    if (strcmp(comand, "EXIT") == 0) {
+//        printf("\n\nEXIT");
+//        return 0;
+//    } else if (strcmp(comand, "DIR") == 0) {
+//        strcpy(endereco,SeparadordeComando(comando,&posicao));
+//        command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
+//    } else if (strcmp(comand, "CLS") == 0) {
+//        command_CLS();
+//    } else if (strcmp(comand, "CD") == 0) {
+//        strcpy(endereco,SeparadordeComando(comando,&posicao));
+//        command_CD(endereco, raiz, &(*diskatual), &(*diratual));
+//    } else if (strcmp(comand, "MD") == 0) {
+//    } else if (strcmp(comand, "RD") == 0) {
+//    } else if (strcmp(comand, "COPY CON") == 0) {
+//    } else if (strcmp(comand, "COPY") == 0) {
+//    } else if (strcmp(comand, "DEL") == 0) {
+//    } else if (strcmp(comand, "TYPE") == 0) {
+//    } else if (strcmp(comand, "FIND") == 0) {
+//    } else if (strcmp(comand, "FC") == 0) {
+//    }
+//    return 1;
+//}

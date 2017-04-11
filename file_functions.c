@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "headers/errors_codes.h"
 #include "headers/file_structs.h"
 #include "headers/dir_structs.h"
@@ -34,7 +36,7 @@ void init_file_content_line(File_content_line **ptrLinha, int *numletras) {
     (*ptrLinha)->letras = numletras;
 };
 
-void init_file_header(File_header **PtrFile, char nome, char* data, char *hora) {
+void init_file_header(File_header **PtrFile, char *nome, char* data, char *hora) {
 
     (*PtrFile) = (File_header*) malloc(sizeof (File_header));
     strncpy((*PtrFile)->NomeArq, nome, 254);
@@ -74,7 +76,7 @@ char file_insert_in_dir(Dir_header **dir_top, File_header **file_h) {
 
 void *file_find_in_dir(Dir_header **dir_top, char file_name[]) {
 
-    File_header *aux = *dir_top;
+    File_header *aux = (*dir_top)->ListaArq;
 
     while (aux->prox != NULL && strcmp(aux->NomeArq, file_name) > 0);
     {
@@ -105,7 +107,7 @@ void file_delete_letter(File_content_letter **lista, File_content_letter **letra
 };
 
 void file_delete_string_line(File_content_letter **lista) {
-    Disk_unit *aux;
+    File_content_letter *aux;
     while ((*lista)) {
         aux = *lista;
         file_delete_letter(&(*lista), &aux);
@@ -126,13 +128,13 @@ void file_delete_line(File_content_line **lista, File_content_line **linha) {
             (*linha)->bottom->top = (*linha)->top;
     }
 
-    file_delete_string_line(&(*lista)->letras);
+    file_delete_string_line(&(*lista)->linha);
     free((*linha));
 
 };
 
 void file_delete_all_lines(File_content_line **lista) {
-    Disk_unit *aux;
+    File_content_line *aux;
     while ((*lista)) {
         aux = *lista;
         file_delete_line(&(*lista), &aux);

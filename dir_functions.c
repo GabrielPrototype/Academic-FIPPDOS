@@ -13,13 +13,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "headers/errors_codes.h"
 #include "headers/dir_structs.h"
 #include "headers/disk_structs.h"
 /*
  * 
  */
-void init_dir_header(Dir_header **PtrDir, char nomeDir, char* data, char *hora) {
+void init_dir_header(Dir_header **PtrDir, char *nomeDir, char* data, char *hora) {
 
     (*PtrDir) = (Dir_header*) malloc(sizeof (Dir_header));
     (*PtrDir)->Head = NULL;
