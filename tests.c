@@ -32,7 +32,7 @@ int test_split()
         for (i = 0; *(tokens + i); i++)
         {
             printf("month=[%s]\n", *(tokens + i));
-            //free(*(tokens + i));
+            free(*(tokens + i));
         }
         printf("\n");
         free(tokens);

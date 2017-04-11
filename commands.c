@@ -200,8 +200,9 @@ int calculaTamanhoArquivo(File_header *arq) {
 //    }
 //}
 
-void command_CLS() {
+void command_CLS(Disk_unit *unidade) {
     clear_screen_cplat();
+    printf("\nFIPPDOS %c :>",unidade->unidade );
 }
 
 //void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {

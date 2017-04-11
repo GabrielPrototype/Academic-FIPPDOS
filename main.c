@@ -22,11 +22,11 @@
 #include "headers/dir_structs.h"
 //#include "headers/crossplatform_fuctions.h"
 #include "headers/errors_codes.h"
+#include "headers/constants.h"
 /*
  * 
  */
-#define CONST_COMMAND_SIZE 255
-#define CONST_FALSE 0
+
 
 char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual);
 //int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
             fippdos_fflush();
             gets(linha_commando);
             //fippdos_fgets(linha_commando);
-            
+            str_toupper(linha_commando);
             interpretador2(linha_commando, &lista_discos, &lista_discos->bottom->bottom, &dirselec );
             //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
     
@@ -66,13 +66,23 @@ int main(int argc, char** argv) {
 char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual) {
 
     char l_commando_aux[CONST_COMMAND_SIZE];
+    char **url;
+    char aux[CONST_COMMAND_SIZE];
+    char aux2[CONST_COMMAND_SIZE];
+    char **unidade;
+    char **pastas;
     char **parametros;
     char validador = CONST_FALSE;
 
     strncpy(l_commando_aux, linha_commando, CONST_COMMAND_SIZE);
     str_removespaces_from_start(l_commando_aux); //limpa espaços no inicio da string
+    
     parametros = str_split(l_commando_aux, ' '); //separa os parametros por espaços
-
+    strncpy(aux2,(*(parametros+1)),CONST_COMMAND_SIZE);
+    unidade = str_split(aux2, ':');
+    strncpy(aux,(*(unidade+1)),CONST_COMMAND_SIZE);
+    pastas = str_split(aux,'/');
+    
     if (strcmp(*(parametros), "EXIT") == 0) {
         printf("\n\nEXIT");
         return 0;
@@ -80,7 +90,7 @@ char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit *
         //strcpy(endereco, SeparadordeComando(*(parametros)o, &posicao));
         //command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
     } else if (strcmp(*(parametros), "CLS") == 0) {
-        //command_CLS();
+        command_CLS(*disco_atual);
     } else if (strcmp(*(parametros), "CD") == 0) {
         //strcpy(endereco, SeparadordeComando(*(parametros)o, &posicao));
         //command_CD(endereco, raiz, &(*diskatual), &(*diratual));
