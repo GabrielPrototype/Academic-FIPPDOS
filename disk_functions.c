@@ -127,3 +127,12 @@ void diskunit_delete_all_reverse(Disk_unit **LStart_Dsk) {
     }
 };
 
+void diskunit_populate_list_AZ(Disk_unit **list){
+    
+    char letra;
+    Disk_unit *aux;
+    for (letra = 'A'; letra <= 'Z'; letra++) {
+        diskunit_init(&aux, letra);
+        diskunit_insert(&(*list), &aux);
+    }
+};

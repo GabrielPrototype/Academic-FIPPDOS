@@ -27,40 +27,61 @@
  * 
  */
 
-
+char demonstrador_fippdos(void);
 char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual);
+
 //int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
 //char SeparadordeComando();
 
 int main(int argc, char** argv) {
+
+    printf("F.I.P.P. DOS\n");
+    demonstrador_fippdos();
+    return (EXIT_SUCCESS);
+};
+
+char demonstrador_fippdos(void) {
+
+    Disk_unit *lista_discos = NULL;
+    Disk_unit *unidade_atual = NULL;
+    Dir_header *diretorio_atual = NULL;
+    printf(" \n**Demonstração do FIPPDOS**\n");
+    
+    printf("\n Alocando unidade de discos de A a Z:"
+            "\n Presione [ENTER] para continuar a demonstração");
+    diskunit_populate_list_AZ(&lista_discos);
+    getchar();
+    unidade_atual = diskunit_find(lista_discos,'C');
+    
+    printf("\n\nFIPPDOS\n");
+    print_prompt(unidade_atual, NULL);
+    
+};
+
+char executa_fippdos(void) {
+
     char linha_commando[CONST_COMMAND_SIZE];
     int execute;
-    
     Disk_unit *aux;
     Disk_unit *diskselec;
     Disk_unit *lista_discos;
     Dir_header *dirselec;
-    
+
     for (char letra = 'A'; letra <= 'Z'; letra++) {
         diskunit_init(&aux, (char) letra);
         diskunit_insert(&lista_discos, &aux);
     }
-    
-    printf("F.I.P.P. DOS");
-    //test_split();
 
-        do {
-            //exibe os atuais
-            fippdos_fflush();
-            gets(linha_commando);
-            //fippdos_fgets(linha_commando);
-            str_toupper(linha_commando);
-            interpretador2(linha_commando, &lista_discos, &lista_discos->bottom->bottom, &dirselec );
-            //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
-    
-        } while (execute > 0);
+    do {
+        //exibe os atuais
+        fippdos_fflush();
+        gets(linha_commando);
+        //fippdos_fgets(linha_commando);
+        str_toupper(linha_commando);
+        interpretador2(linha_commando, &lista_discos, &lista_discos->bottom->bottom, &dirselec);
+        //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
 
-    return (EXIT_SUCCESS);
+    } while (execute > 0);
 };
 
 char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual) {
@@ -76,13 +97,13 @@ char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit *
 
     strncpy(l_commando_aux, linha_commando, CONST_COMMAND_SIZE);
     str_removespaces_from_start(l_commando_aux); //limpa espaços no inicio da string
-    
+
     parametros = str_split(l_commando_aux, ' '); //separa os parametros por espaços
-    strncpy(aux2,(*(parametros+1)),CONST_COMMAND_SIZE);
+    strncpy(aux2, (*(parametros + 1)), CONST_COMMAND_SIZE);
     unidade = str_split(aux2, ':');
-    strncpy(aux,(*(unidade+1)),CONST_COMMAND_SIZE);
-    pastas = str_split(aux,'/');
-    
+    strncpy(aux, (*(unidade + 1)), CONST_COMMAND_SIZE);
+    pastas = str_split(aux, '/');
+
     if (strcmp(*(parametros), "EXIT") == 0) {
         printf("\n\nEXIT");
         return 0;

@@ -35,23 +35,49 @@ void SetHora(char hora[]) {
 }
 
 void SetData(char data[]) {
-//    char aux[2];
-//    _strdate(data);
-//
-//    aux[0] = data[0];
-//    aux[1] = data[1];
-//    data[0] = data[3];
-//    data[1] = data[4];
-//    data[3] = aux[0];
-//    data[4] = aux[1];
-//
-//    data[9] = data[7];
-//    data[8] = data[6];
-//    data[6] = '2';
-//    data[7] = '0';
-//
-//    data[10] = '\0';
+    //    char aux[2];
+    //    _strdate(data);
+    //
+    //    aux[0] = data[0];
+    //    aux[1] = data[1];
+    //    data[0] = data[3];
+    //    data[1] = data[4];
+    //    data[3] = aux[0];
+    //    data[4] = aux[1];
+    //
+    //    data[9] = data[7];
+    //    data[8] = data[6];
+    //    data[6] = '2';
+    //    data[7] = '0';
+    //
+    //    data[10] = '\0';
 }
+
+void print_dir_url(Dir_header *diretorio) {
+
+    print_dir_url(diretorio->PtrPai);
+    if (diretorio) {
+        printf("\\%s", diretorio->NomeDir);
+    }
+};
+
+void print_prompt(Disk_unit *unidade_atual, Dir_header *diretorio_atual) {
+
+    if (unidade_atual) {
+        printf("%c:", unidade_atual->unidade);
+
+        if (diretorio_atual) {
+            print_dir_url(diretorio_atual);
+        } else {
+            printf("\\");
+        }
+        
+        printf(">");
+    }
+
+
+
+};
 
 void exibirL(Disk_unit *Unit, Dir_header *pa) {
     if (pa != Unit->iniDir) {
@@ -202,7 +228,7 @@ int calculaTamanhoArquivo(File_header *arq) {
 
 void command_CLS(Disk_unit *unidade) {
     clear_screen_cplat();
-    printf("\nFIPPDOS %c :>",unidade->unidade );
+    printf("\nFIPPDOS %c :>", unidade->unidade);
 }
 
 //void command_CD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
