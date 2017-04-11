@@ -20,7 +20,7 @@
 
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
-#include "headers/teste_detect_os.h"
+//#include "headers/crossplatform_fuctions.h"
 #include "headers/errors_codes.h"
 /*
  * 
@@ -43,14 +43,14 @@ int main(int argc, char** argv) {
     printf("F.I.P.P. DOS");
     test_split();
 
-    do {
-        //exibe os atuais
-        fippdos_fflush();
-        fippdos_fgets(linha_commando);
-
-        //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
-
-    } while (execute > 0);
+//    do {
+//        //exibe os atuais
+//        fippdos_fflush();
+//        fippdos_fgets(linha_commando);
+//
+//        //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
+//
+//    } while (execute > 0);
 
     return (EXIT_SUCCESS);
 };
