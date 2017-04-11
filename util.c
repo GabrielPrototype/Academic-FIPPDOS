@@ -16,14 +16,47 @@
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <time.h>
 #include "headers/constants.h"
+
 /*
  * 
  */
+
+int nsleep(long miliseconds)
+{
+   struct timespec req, rem;
+
+   if(miliseconds > 999)
+   {   
+        req.tv_sec = (int)(miliseconds / 1000);                            /* Must be Non-Negative */
+        req.tv_nsec = (miliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
+   }   
+   else
+   {   
+        req.tv_sec = 0;                         /* Must be Non-Negative */
+        req.tv_nsec = miliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
+   }   
+
+   return nanosleep(&req , &rem);
+}
+
+void slow_printer(char str[]) {
+    int i;
+    int len = strlen(str);
+
+    for (i = 0; i < len; i++) {
+
+        putchar(str[i]);
+        nsleep(50);
+    }
+};
+
 void str_toupper(char s[]) {
     int i;
-    for(i = 0; i < CONST_COMMAND_SIZE && s[i] != '\0'; i++){
-        
+    for (i = 0; i < CONST_COMMAND_SIZE && s[i] != '\0'; i++) {
+
         s[i] = toupper(s[i]);
     }
 }

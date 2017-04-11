@@ -42,13 +42,22 @@ char fippdos_fflush(){
 
 #elif __linux__
     // linux
+
+void clean_stdin(void)
+{
+    int c;
+    do {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
+};
+
 void clear_screen_cplat(){
     system("clear");
     printf("\n");
 };
 
 char fippdos_fflush(){
-    setbuf(stdin, NULL);
+    clean_stdin();
 };
 #elif __unix__ // all unices not caught above
     // Unix

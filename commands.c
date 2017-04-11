@@ -74,9 +74,6 @@ void print_prompt(Disk_unit *unidade_atual, Dir_header *diretorio_atual) {
         
         printf(">");
     }
-
-
-
 };
 
 void exibirL(Disk_unit *Unit, Dir_header *pa) {
@@ -124,6 +121,13 @@ int calculaTamanhoArquivo(File_header *arq) {
         laux = laux->bottom;
     }
     return tamanho;
+}
+
+void command_MD(Dir_header **dir_dest, char nome[]) {
+    
+    Dir_header *novo;
+    dir_init_header(&(*dir_dest))
+    
 }
 
 //char SeparadordeComando(char commando[], int *pos) {
@@ -272,7 +276,7 @@ void command_CLS(Disk_unit *unidade) {
 //    printf("\n\n");
 //}
 
-//void command_MD(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
+//void command_MD_old(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
 //    Disk_unit *uAUX = NULL;
 //    Dir_header *pAUX = NULL;
 //    if (endereco[0] == '\0') { //MD vazio 

@@ -41,7 +41,8 @@ int main(int argc, char** argv) {
 };
 
 char demonstrador_fippdos(void) {
-
+    
+    setbuf(stdout, NULL);
     Disk_unit *lista_discos = NULL;
     Disk_unit *unidade_atual = NULL;
     Dir_header *diretorio_atual = NULL;
@@ -55,7 +56,9 @@ char demonstrador_fippdos(void) {
     
     printf("\n\nFIPPDOS\n");
     print_prompt(unidade_atual, NULL);
-    
+    slow_printer("MD TESTE1");
+    command_MD()
+    getchar();
 };
 
 char executa_fippdos(void) {

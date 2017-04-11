@@ -20,7 +20,7 @@
 /*
  * 
  */
-void init_dir_header(Dir_header **PtrDir, char *nomeDir, char* data, char *hora) {
+void dir_init_header(Dir_header **PtrDir, char *nomeDir, char* data, char *hora) {
 
     (*PtrDir) = (Dir_header*) malloc(sizeof (Dir_header));
     (*PtrDir)->Head = NULL;
