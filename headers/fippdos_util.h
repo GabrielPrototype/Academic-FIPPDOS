@@ -17,6 +17,7 @@
 #include <stddef.h>
 
 char fippdos_fgets(char vetchar[]) {
+    
     char *pos;
     if ((pos = strchr(vetchar, '\n')) != NULL)
         *pos = '\0';

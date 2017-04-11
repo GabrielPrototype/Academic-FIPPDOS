@@ -142,7 +142,7 @@ int calculaTamanhoArquivo(File_header *arq) {
 //    return p;
 //}
 
-//void command_DIR(char endereco[], Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec) {
+//void command_DIR(Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec, Dir_header **parametro) {
 //    Disk_unit *uAUX = NULL;
 //    Dir_header *pAUX = NULL, *pAUX2;
 //    File_header *aAUX = NULL;

@@ -35,37 +35,64 @@ char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit *
 int main(int argc, char** argv) {
     char linha_commando[CONST_COMMAND_SIZE];
     int execute;
-
+    
+    Disk_unit *aux;
     Disk_unit *diskselec;
-    Disk_unit *raiz;
+    Disk_unit *lista_discos;
     Dir_header *dirselec;
     
+    for (char letra = 'A'; letra <= 'Z'; letra++) {
+        diskunit_init(&aux, (char) letra);
+        diskunit_insert(&lista_discos, &aux);
+    }
+    
     printf("F.I.P.P. DOS");
-    test_split();
+    //test_split();
 
-//    do {
-//        //exibe os atuais
-//        fippdos_fflush();
-//        fippdos_fgets(linha_commando);
-//
-//        //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
-//
-//    } while (execute > 0);
+        do {
+            //exibe os atuais
+            fippdos_fflush();
+            gets(linha_commando);
+            //fippdos_fgets(linha_commando);
+            
+            interpretador2(linha_commando, &lista_discos, &lista_discos->bottom->bottom, &dirselec );
+            //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
+    
+        } while (execute > 0);
 
     return (EXIT_SUCCESS);
 };
 
-char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual){
+char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual) {
 
     char l_commando_aux[CONST_COMMAND_SIZE];
     char **parametros;
     char validador = CONST_FALSE;
-    
-    strncpy(l_commando_aux,linha_commando,CONST_COMMAND_SIZE);
+
+    strncpy(l_commando_aux, linha_commando, CONST_COMMAND_SIZE);
     str_removespaces_from_start(l_commando_aux); //limpa espaços no inicio da string
-    parametros = str_split(parametros, ' '); //separa os parametros por espaços
-    
-    
+    parametros = str_split(l_commando_aux, ' '); //separa os parametros por espaços
+
+    if (strcmp(*(parametros), "EXIT") == 0) {
+        printf("\n\nEXIT");
+        return 0;
+    } else if (strcmp(*(parametros), "DIR") == 0) {
+        //strcpy(endereco, SeparadordeComando(*(parametros)o, &posicao));
+        //command_DIR(endereco, raiz, &(*diskatual), &(*diratual));
+    } else if (strcmp(*(parametros), "CLS") == 0) {
+        //command_CLS();
+    } else if (strcmp(*(parametros), "CD") == 0) {
+        //strcpy(endereco, SeparadordeComando(*(parametros)o, &posicao));
+        //command_CD(endereco, raiz, &(*diskatual), &(*diratual));
+    } else if (strcmp(*(parametros), "MD") == 0) {
+    } else if (strcmp(*(parametros), "RD") == 0) {
+    } else if (strcmp(*(parametros), "COPY CON") == 0) {
+    } else if (strcmp(*(parametros), "COPY") == 0) {
+    } else if (strcmp(*(parametros), "DEL") == 0) {
+    } else if (strcmp(*(parametros), "TYPE") == 0) {
+    } else if (strcmp(*(parametros), "FIND") == 0) {
+    } else if (strcmp(*(parametros), "FC") == 0) {
+    }
     return ERROR_UNKNOWN;
 };
 

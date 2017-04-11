@@ -37,7 +37,7 @@ void clear_screen_cplat(){
 };
 
 char fippdos_fflush(){
-    fflush(stdin)
+    fflush(stdin);
 };
 
 #elif __linux__
@@ -48,8 +48,7 @@ void clear_screen_cplat(){
 };
 
 char fippdos_fflush(){
-    __fpurge(stdin);
-    setbuffer();
+    setbuf(stdin, NULL);
 };
 #elif __unix__ // all unices not caught above
     // Unix
