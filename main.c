@@ -26,7 +26,7 @@
  * 
  */
 #define CONST_COMMAND_SIZE 255
-
+#define CONST_FALSE 0
 
 char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual);
 //int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
@@ -59,10 +59,11 @@ char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit *
 
     char l_commando_aux[CONST_COMMAND_SIZE];
     char **parametros;
+    char validador = CONST_FALSE;
     
     strncpy(l_commando_aux,linha_commando,CONST_COMMAND_SIZE);
     str_removespaces_from_start(l_commando_aux); //limpa espaços no inicio da string
-    parametros = str_split(parametros, ' '); //separa os parametros em espaços.
+    parametros = str_split(parametros, ' '); //separa os parametros por espaços
     
     
     return ERROR_UNKNOWN;
