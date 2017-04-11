@@ -21,16 +21,19 @@
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
 #include "headers/teste_detect_os.h"
-
+#include "headers/errors_codes.h"
 /*
  * 
  */
+#define CONST_COMMAND_SIZE 255
 
+
+char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual);
 //int interpretador(char *comando, Disk_unit *raiz, Disk_unit *diskatual, Dir_header *diratual);
 //char SeparadordeComando();
 
 int main(int argc, char** argv) {
-    char linhac[255];
+    char linha_commando[CONST_COMMAND_SIZE];
     int execute;
 
     Disk_unit *diskselec;
@@ -43,14 +46,28 @@ int main(int argc, char** argv) {
     do {
         //exibe os atuais
         fippdos_fflush();
-        fippdos_fgets(linhac);
+        fippdos_fgets(linha_commando);
 
-        execute = interpretador(linhac, raiz, diskselec, dirselec);
+        //execute = interpretador(linha_commando, raiz, diskselec, dirselec);
 
     } while (execute > 0);
 
     return (EXIT_SUCCESS);
 };
+
+char interpretador2(char linha_commando[], Disk_unit **lista_discos, Disk_unit **disco_atual, Dir_header **diretorio_atual){
+
+    char l_commando_aux[CONST_COMMAND_SIZE];
+    char **parametros;
+    
+    strncpy(l_commando_aux,linha_commando,CONST_COMMAND_SIZE);
+    str_removespaces_from_start(l_commando_aux); //limpa espaços no inicio da string
+    parametros = str_split(parametros, ' '); //separa os parametros em espaços.
+    
+    
+    return ERROR_UNKNOWN;
+};
+
 
 //char * SeparadordeComando(char *com, int *pos) {
 //    int i = 0;

@@ -14,6 +14,8 @@
 #ifndef ERRORS_CODES_H
 #define ERRORS_CODES_H
 
+#define ERROR_UNKNOWN -1
+
 #define ERROR_DIR_NOT_FOUND 31
 #define ERROR_DUPLICATED_DIR 32
 
