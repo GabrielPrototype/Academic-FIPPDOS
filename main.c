@@ -36,18 +36,18 @@ int main(int argc, char** argv) {
     Disk_unit *diskselec;
     Disk_unit *raiz;
     Dir_header *dirselec;
-
+    
     printf("F.I.P.P. DOS");
 
 
-//    do {
-//        //exibe os atuais
-//        fippdos_fflush();
-//        fippdos_fgets(linhac);
-//
-//        execute = interpretador(linhac, raiz, diskselec, dirselec);
-//
-//    } while (execute > 0);
+    do {
+        //exibe os atuais
+        fippdos_fflush();
+        fippdos_fgets(linhac);
+
+        execute = interpretador(linhac, raiz, diskselec, dirselec);
+
+    } while (execute > 0);
 
     return (EXIT_SUCCESS);
 };

@@ -39,7 +39,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/dir_functions.o \
 	${OBJECTDIR}/disk_functions.o \
 	${OBJECTDIR}/file_functions.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/tests.o \
+	${OBJECTDIR}/util.o
 
 
 # C Compiler Flags
@@ -90,6 +92,16 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+
+${OBJECTDIR}/tests.o: tests.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tests.o tests.c
+
+${OBJECTDIR}/util.o: util.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -std=c11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/util.o util.c
 
 # Subprojects
 .build-subprojects:

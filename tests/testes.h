@@ -14,9 +14,9 @@
 #ifndef TESTES_H
 #define TESTES_H
 
-#include "headers/disk_structs.h"
-#include "headers/dir_structs.h"
-#include "headers/teste_detect_os.h"
+#include "../headers/disk_structs.h"
+#include "../headers/dir_structs.h"
+#include "../headers/teste_detect_os.h"
 
 void tempo_test(void) {
 
@@ -112,5 +112,8 @@ void dir_test(void) {
     dir_insert_diretorio(&test_C, aux);
 
 }
+
+
+
 #endif /* TESTES_H */
 

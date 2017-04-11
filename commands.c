@@ -23,6 +23,9 @@
 /*
  * 
  */
+
+int calculaTamanhoArquivo(File_header *arq);
+
 void SetHora(char hora[]) {
     hora[0] = __TIME__[0];
     hora[1] = __TIME__[1];
