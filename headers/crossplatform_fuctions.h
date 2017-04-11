@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+#include <stdio.h>
+
+
 /* 
  * File:   teste_detect_os.h
  * Author: titan
@@ -46,6 +49,7 @@ void clear_screen_cplat(){
 
 char fippdos_fflush(){
     __fpurge(stdin);
+    setbuffer();
 };
 #elif __unix__ // all unices not caught above
     // Unix
