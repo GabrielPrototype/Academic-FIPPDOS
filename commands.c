@@ -105,12 +105,12 @@ void file_show(File_header *file_top) {
     printf("\n%d Arquivo(s)                        %d bytes", qtde, tamanhob);
 }
 
-void dir_show(Dir_header *Dir_top) {
-    Dir_header *aux = Dir_top;
-    while (aux != NULL);
+void dir_show(Dir_header *dir) {
+
+    while (dir != NULL);
     {
-        printf("\n%s  %s    <DIR>          %s", aux->data, aux->hora, aux->NomeDir);
-        aux = aux->Tail;
+        printf("\n%s  %s    <DIR>          %s", dir->data, dir->hora, dir->NomeDir);
+        dir = dir->Tail;
     }
 }
 
@@ -144,6 +144,23 @@ void command_MD(Disk_unit **unidade_dest, Dir_header **dir_dest, char nome[]) {
         dir_insert_diretorio(&(*unidade_dest)->iniDir, &dir_novo);
     }
 
+}
+
+void command_DIR(Disk_unit *unidade, Dir_header *dir){
+
+    Dir_header *aux;
+    char flag = CONST_FALSE;
+    if(dir){
+        aux = dir;
+        flag = !flag;
+    }else if (unidade){
+        aux = unidade->iniDir->Head;
+        flag = !flag;
+    }
+    if(flag){
+        dir_show(aux);
+    }
+    
 }
 
 //char SeparadordeComando(char commando[], int *pos) {
@@ -188,7 +205,7 @@ void command_MD(Disk_unit **unidade_dest, Dir_header **dir_dest, char nome[]) {
 //    return p;
 //}
 
-//void command_DIR(Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec, Dir_header **parametro) {
+//void command_DIR_old(Disk_unit *raiz, Disk_unit **unidadeSelec, Dir_header **pastaSelec, Dir_header **parametro) {
 //    Disk_unit *uAUX = NULL;
 //    Dir_header *pAUX = NULL, *pAUX2;
 //    File_header *aAUX = NULL;

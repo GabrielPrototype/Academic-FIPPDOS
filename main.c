@@ -62,6 +62,10 @@ char demonstrador_fippdos(void) {
     print_prompt(unidade_atual, NULL);
     slow_printer("MD TESTE2");
     command_MD(&unidade_atual,&diretorio_atual,"TESTE2");
+    
+    print_prompt(unidade_atual, NULL);
+    slow_printer("DIR");
+    command_DIR(unidade_atual,diretorio_atual);
     getchar();
 };
 
