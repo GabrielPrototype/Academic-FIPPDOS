@@ -17,19 +17,20 @@
 #include "headers/errors_codes.h"
 #include "headers/dir_structs.h"
 #include "headers/disk_structs.h"
+#include "headers/constants.h"
 /*
  * 
  */
-void dir_init_header(Dir_header **PtrDir, char *nomeDir, char* data, char *hora) {
+void dir_init_header(Dir_header **PtrDir, char nomeDir[], char data[], char hora[]) {
 
     (*PtrDir) = (Dir_header*) malloc(sizeof (Dir_header));
     (*PtrDir)->Head = NULL;
     (*PtrDir)->Tail = NULL;
     (*PtrDir)->ListaArq = NULL;
     (*PtrDir)->PtrPai = NULL;
-    strncpy((*PtrDir)->NomeDir, nomeDir, 254);
-    strncpy((*PtrDir)->data, data, 254);
-    strncpy((*PtrDir)->data, data, 254);
+    strncpy((*PtrDir)->NomeDir, nomeDir, CONST_DIR_SIZE);
+    strncpy((*PtrDir)->data, data, CONST_DATA_SIZE);
+    strncpy((*PtrDir)->hora, hora, CONST_HORA_SIZE);
 };
 
 //dir_header *Cons(Dir_header **Construcao) {
@@ -53,7 +54,7 @@ char dir_insert_diretorio(Dir_header **Dir_top, Dir_header **Dir) {
                 ant = aux;
                 aux = aux->Tail;
             }
-            if (strcmp(ant->NomeDir, (*Dir)->NomeDir) == 0 || strcmp(aux->NomeDir, (*Dir)->NomeDir) == 0) {
+            if (strcmp(ant->NomeDir, (*Dir)->NomeDir) == 0) {
                 return ERROR_DUPLICATED_DIR; // não é possivel inserir diretorios duplicados
             }
             if (aux == NULL) { // insere no fim

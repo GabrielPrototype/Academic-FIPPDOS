@@ -57,7 +57,11 @@ char demonstrador_fippdos(void) {
     printf("\n\nFIPPDOS\n");
     print_prompt(unidade_atual, NULL);
     slow_printer("MD TESTE1");
-    command_MD()
+    command_MD(&unidade_atual,&diretorio_atual,"TESTE1");
+    
+    print_prompt(unidade_atual, NULL);
+    slow_printer("MD TESTE2");
+    command_MD(&unidade_atual,&diretorio_atual,"TESTE2");
     getchar();
 };
 

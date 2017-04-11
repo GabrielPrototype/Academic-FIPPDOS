@@ -22,7 +22,7 @@ void diskunit_init(Disk_unit **Disk, char *Unit) {//criacaixa
     (*Disk) = (Disk_unit*) malloc(sizeof (Disk_unit));
     (*Disk)->bottom = NULL;
     (*Disk)->top = NULL;
-    (*Disk)->iniDir = NULL;
+    (*Disk)->iniDir = (Dir_header*) malloc(sizeof(Dir_header));
     (*Disk)->unidade = Unit;
 };
 

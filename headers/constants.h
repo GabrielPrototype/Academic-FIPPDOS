@@ -15,6 +15,10 @@
 #define CONSTANTS_H
 
 #define CONST_COMMAND_SIZE 255
+#define CONST_DIR_SIZE 15
+#define CONST_DATA_SIZE 11
+#define CONST_HORA_SIZE 6
+
 #define CONST_FALSE 0
 
 #endif /* CONSTANTS_H */

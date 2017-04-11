@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "headers/disk_structs.h"
 #include "headers/dir_structs.h"
@@ -63,6 +64,7 @@ void print_dir_url(Dir_header *diretorio) {
 
 void print_prompt(Disk_unit *unidade_atual, Dir_header *diretorio_atual) {
 
+    printf("\n");
     if (unidade_atual) {
         printf("%c:", unidade_atual->unidade);
 
@@ -71,7 +73,7 @@ void print_prompt(Disk_unit *unidade_atual, Dir_header *diretorio_atual) {
         } else {
             printf("\\");
         }
-        
+
         printf(">");
     }
 };
@@ -123,11 +125,25 @@ int calculaTamanhoArquivo(File_header *arq) {
     return tamanho;
 }
 
-void command_MD(Dir_header **dir_dest, char nome[]) {
-    
-    Dir_header *novo;
-    dir_init_header(&(*dir_dest))
-    
+void command_MD(Disk_unit **unidade_dest, Dir_header **dir_dest, char nome[]) {
+
+    char data[11];
+    char hora[6];
+    Dir_header *dir_novo;
+
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+
+    sprintf(hora, "%d:%d", tm.tm_hour, tm.tm_min);
+    sprintf(data, "%d/%d/%d", 1900 + tm.tm_year, tm.tm_mon, tm.tm_mday);
+    dir_init_header(&dir_novo, nome, data, hora);
+
+    if (*dir_dest) {
+        dir_insert_diretorio(&(*dir_dest), &dir_novo);
+    } else if (*unidade_dest) {
+        dir_insert_diretorio(&(*unidade_dest)->iniDir, &dir_novo);
+    }
+
 }
 
 //char SeparadordeComando(char commando[], int *pos) {

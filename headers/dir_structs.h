@@ -15,13 +15,15 @@
 #define DIR_STRUCTS_H
 
 #include "file_structs.h"
+#include "constants.h"
+
 
 struct dir_header {
     File_header *ListaArq;
     struct dir_header *Head, *PtrPai, *Tail; //subdiretorio,ponteiropai,ponteiroirmao
-    char NomeDir[15];
-    char data[9];
-    char hora[5];
+    char NomeDir[CONST_DIR_SIZE];
+    char data[CONST_DATA_SIZE];
+    char hora[CONST_HORA_SIZE];
 };
 
 typedef struct dir_header Dir_header;
