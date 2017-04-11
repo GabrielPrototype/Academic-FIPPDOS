@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     Dir_header *dirselec;
     
     printf("F.I.P.P. DOS");
-
+    test_split();
 
     do {
         //exibe os atuais
